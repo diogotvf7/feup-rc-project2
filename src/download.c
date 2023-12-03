@@ -119,8 +119,8 @@ int main(int argc, char **argv)
     char port[6];
     char path[255];
 
-    const char *url = "ftp://user:password@host:21/path/to/file";
-    // const char *url = "ftp://user@host:21/path/to/file";
+    // const char *url = "ftp://user:password@host:21/path/to/file";
+    const char *url = "ftp://user@host:21/path/to/file";
     // const char *url = "ftp://host:21/path/to/file";
     // const char *url = "ftp://host/path/to/file";
     // const char *url = "ftp://user@host";
