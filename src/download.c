@@ -1,15 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-// ftp://[<user>:<password>@]<host>[:port][/<url-path>]
-
-enum url_read_state
-{
-    PROTOCOL,
-    USER,
-    HOST,
-    PORT,
-    PATH,
-};
+#include "download.h"
 
 int parse_url(const char *url, char *protocol, char *username, char *password, char *host, char *port, char *path)
 {
@@ -21,7 +10,6 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
         switch (state)
         {
         case PROTOCOL:
-            printf("PROTOCOL\n");
             if (sscanf(url, "%15[^:@/]://%n", protocol, &n) && n > 0)
             {
                 state = USER;
@@ -33,7 +21,6 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
             }
             break;
         case USER:
-            printf("USER\n");
             if (sscanf(url, "%255[^:@/]:%255[^:@/]@%n", username, password, &n) && n > 0)
             {
                 url += n;
@@ -51,7 +38,6 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
             state = HOST;
             break;
         case HOST:
-            printf("HOST\n");
             if (sscanf(url, "%255[^:@/]:%n", host, &n) && n > 0)
             {
                 state = PORT;
@@ -75,7 +61,6 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
             }
             break;
         case PORT:
-            printf("PORT\n");
             if (sscanf(url, "%5[0123456789]/%n", port, &n) && n > 0)
             {
                 state = PATH;
@@ -93,7 +78,6 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
             }
             break;
         case PATH:
-            printf("PATH\n");
             if (sscanf(url, "%255[^:@]%n", path, &n) && n > 0)
             {
                 return 0;
@@ -110,25 +94,27 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
     return 0;
 }
 
-int main(int argc, char **argv)
-{
-    char protocol[16];
-    char username[255];
-    char password[255];
-    char host[255];
-    char port[6];
-    char path[255];
+// int connect()
+// {
+//     struct addrinfo;
+//     return 0;
+// }
 
-    const char *url = "ftp://user:password@host:21/path/to/file";
-    // const char *url = "ftp://user@host:21/path/to/file";
-    // const char *url = "ftp://host:21/path/to/file";
-    // const char *url = "ftp://host/path/to/file";
-    // const char *url = "ftp://user@host";
-    // const char *url = "ftp://user:password@host";
+// int auth()
+// {
+//     return 0;
+// }
+
+int download(const char *url)
+{
+    char protocol[16],
+        username[255],
+        password[255],
+        host[255],
+        port[6],
+        path[255];
 
     parse_url(url, protocol, username, password, host, port, path);
-
-    printf("\n");
 
     printf("protocol: %s\n", protocol);
     printf("username: %s\n", username);
