@@ -7,6 +7,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#define h_addr h_addr_list[0]
+
 /**
  * The struct hostent (host entry) with its terms documented
 
@@ -18,8 +20,6 @@
         char **h_addr_list;    // A zero-terminated array of network addresses for the host.
         // Host addresses are in Network Byte Order.
     };
-
-    #define h_addr h_addr_list[0]	The first address in h_addr_list.
 */
 
 int hostname_to_ip(const char *hostname, struct hostent *h);

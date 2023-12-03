@@ -9,6 +9,8 @@
 #include <sys/socket.h>
 #include <string.h>
 
+#include "util.h"
+
 enum url_read_state
 {
     PROTOCOL,
@@ -18,7 +20,18 @@ enum url_read_state
     PATH,
 };
 
-int parse_url(const char *url, char *protocol, char *username, char *password, char *host, char *port, char *path);
+struct URL
+{
+    char protocol[16];
+    char username[256];
+    char password[256];
+    char hostname[256];
+    char ip[256];
+    char port[16];
+    char path[256];
+};
+
+int parse_url(const char *arg, struct URL *url);
 int download(const char *url);
 
 #endif

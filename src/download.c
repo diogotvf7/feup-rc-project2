@@ -1,6 +1,7 @@
 #include "download.h"
 
-int parse_url(const char *url, char *protocol, char *username, char *password, char *host, char *port, char *path)
+// int parse_url(const char *url, char *protocol, char *username, char *password, char *host, char *port, char *path)
+int parse_url(const char *arg, struct URL *url)
 {
     int state = PROTOCOL;
 
@@ -10,10 +11,10 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
         switch (state)
         {
         case PROTOCOL:
-            if (sscanf(url, "%15[^:@/]://%n", protocol, &n) && n > 0)
+            if (sscanf(arg, "%15[^:@/]://%n", url->protocol, &n) && n > 0)
             {
                 state = USER;
-                url += n;
+                arg += n;
             }
             else
             {
@@ -21,70 +22,71 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
             }
             break;
         case USER:
-            if (sscanf(url, "%255[^:@/]:%255[^:@/]@%n", username, password, &n) && n > 0)
+            if (sscanf(arg, "%255[^:@/]:%255[^:@/]@%n", url->username, url->password, &n) && n > 0)
             {
-                url += n;
+                arg += n;
             }
-            else if (sscanf(url, "%255[^:@/]@%n", username, &n) && n > 0)
+            else if (sscanf(arg, "%255[^:@/]@%n", url->username, &n) && n > 0)
             {
-                url += n;
-                password[0] = '\0';
+                arg += n;
+                url->password[0] = '\0';
             }
             else
             {
-                username[0] = '\0';
-                password[0] = '\0';
+                url->username[0] = '\0';
+                url->password[0] = '\0';
             }
             state = HOST;
             break;
         case HOST:
-            if (sscanf(url, "%255[^:@/]:%n", host, &n) && n > 0)
+            if (sscanf(arg, "%255[^:@/]:%n", url->hostname, &n) && n > 0)
             {
                 state = PORT;
-                url += n;
+                arg += n;
             }
-            else if (sscanf(url, "%255[^:@/]/%n", host, &n) && n > 0)
+            else if (sscanf(arg, "%255[^:@/]/%n", url->hostname, &n) && n > 0)
             {
-                port[0] = '\0';
+                url->port[0] = '\0';
                 state = PATH;
-                url += n;
+                arg += n;
             }
-            else if (sscanf(url, "%255[^:/@]%n", host, &n) && n > 0)
+            else if (sscanf(arg, "%255[^:/@]%n", url->hostname, &n) && n > 0)
             {
-                port[0] = '\0';
-                path[0] = '\0';
+                url->port[0] = '\0';
+                url->path[0] = '\0';
                 return 0;
             }
             else
             {
                 return 1;
             }
+
             break;
         case PORT:
-            if (sscanf(url, "%5[0123456789]/%n", port, &n) && n > 0)
+            if (sscanf(arg, "%5[0123456789]/%n", url->port, &n) && n > 0)
             {
                 state = PATH;
-                url += n;
+                arg += n;
             }
-            else if (sscanf(url, "%5[0123456789]%n", port, &n) && n > 0)
+            else if (sscanf(arg, "%5[0123456789]%n", url->port, &n) && n > 0)
             {
-                path[0] = '\0';
+                url->path[0] = '\0';
                 return 0;
             }
             else
             {
-                port[0] = '\0';
+                url->port[0] = '\0';
                 return 1;
             }
             break;
         case PATH:
-            if (sscanf(url, "%255[^:@]%n", path, &n) && n > 0)
+            if (sscanf(arg, "%255[^:@]%n", url->path, &n) && n > 0)
             {
                 return 0;
             }
             else
             {
-                path[0] = '\0';
+                url->path[0] = '\0';
                 return 0;
             }
             break;
@@ -105,23 +107,30 @@ int parse_url(const char *url, char *protocol, char *username, char *password, c
 //     return 0;
 // }
 
-int download(const char *url)
+int download(const char *arg)
 {
-    char protocol[16],
-        username[255],
-        password[255],
-        host[255],
-        port[6],
-        path[255];
+    // ---------------------------------------------- PARSE URL
+    struct URL url;
 
-    parse_url(url, protocol, username, password, host, port, path);
+    parse_url(arg, &url);
 
-    printf("protocol: %s\n", protocol);
-    printf("username: %s\n", username);
-    printf("password: %s\n", password);
-    printf("host: %s\n", host);
-    printf("port: %s\n", port);
-    printf("path: %s\n", path);
+    printf("protocol: %s\n", url.protocol);
+    printf("username: %s\n", url.username);
+    printf("password: %s\n", url.password);
+    printf("host: %s\n", url.hostname);
+    printf("port: %s\n", url.port);
+    printf("path: %s\n", url.path);
+    // ---------------------------------------------- PARSE URL
+
+    // ---------------------------------------------- GET HOST IP
+
+    struct hostent *h = malloc(sizeof(struct hostent));
+    hostname_to_ip(url.hostname, h);
+    printf("Hello world!\n");
+
+    strcpy(url.ip, inet_ntoa(*((struct in_addr *)h->h_addr)));
+
+    printf("ip: %s\n", url.ip);
 
     return 0;
 }
