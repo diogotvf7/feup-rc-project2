@@ -61,20 +61,45 @@ In the context of our experience, the IPv4 and MAC addresses of each computer ar
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | The MAC (Media Access Control) address is a globally unique identifier that identifies a computer. It is used in the data link layer to ensure the physical address of the computer - this means it is related to the hardware. MAC addresses can't be easily found by third parties, as they are not broadcast over the internet. It is composed of 6 bytes (48 bits) and is represented in hexadecimal. | The IP (Internet Protocol) address identifies a connection between a computer and a network. It can change over time and due to the environment. It is used in the network layer to ensure the logical address of the computer - this means it is related to the software. IP addresses can be easily found by third parties, as they are broadcast over the internet. It is composed of 4 bytes (32 bits) and is represented in decimal. |
 
+
 </details>
 <details>
     <summary>What packets does the ping command generate?</summary>
 
+```
+The Ping command generates Address Resolution Protocol (ARP) packets.It also generates Internet Control Message Protocol (ICMP) packets. ICMP is a network layer protocol that reports errors and provides other information relevant to IP packet processing. ICMP is used by the ping command to test an IP network connection. 
+```
+
+
 </details>
 <details>
     <summary>What are the MAC and IP addresses of the ping packets?</summary>
+
+```
+The MAC and IP addresses of the ping packets are the same as the computers that are communicating. 
+```
+![EXP2 GNU3-GNU4](images/pingMACIP.png)
+
 </details>
 <details>
-    <summary>How to determine if a receiving Ethernet frame is ARP, IP, ICMP?</summary>
+    <summary>How to determine if a receiving Ethernet frame is ARP, IP, ICMP</summary>
+
+```
+It is possible to determine if a receiving Ethernet frame is ARP, IP, ICMP by checking WireShark capture, in Portocol column. This protocol is usually placed in the first 2 bytes of the Ethernet frame. 
+``` 
+
 </details>
 <details>
     <summary>How to determine the length of a receiving frame?</summary>
+
+```
+It is possible to determine the length of a receiving frame by checking WireShark capture, in Length column. 
+```
 </details>
 <details>
     <summary>What is the loopback interface and why is it important</summary>
+
+```
+The loopback interface is a virtual interface that is always up and available after the operating system has booted. It is used to communicate with the operating system itself. It is important because it is used to test the network software without the need for any hardware network interfaces. With this, it is possible to periodically check if the connections are working properly. 
+```
 </details>
