@@ -78,3 +78,12 @@ In the context of our experience, the IPv4 and MAC addresses of each computer ar
 <details>
     <summary>What is the loopback interface and why is it important</summary>
 </details>
+
+# Exp 3
+
+## Lab
+
+| PC    | eth  | ip            | mac               |
+| ----- | ---- | ------------- | ----------------- |
+| gnu64 | eth0 | 172.16.60.254 | 00:21:5a:5a:75:bb |
+| gnu64 | eth1 | 172.16.61.253 | 00:08:54:71:73:ed |

@@ -18,7 +18,8 @@ BIN = bin/
 # URL = ftp://ftp.up.pt
 # URL = ftp://ftp.up.pt:21/
 
-URL = ftp://rcom:rcom@netlab1.fe.up.pt
+# URL = ftp://rcom:rcom@netlab1.fe.up.pt
+URL = ftp://ftp.up.pt/pub/kodi/robots.txt
 
 # Targets
 .PHONY: all

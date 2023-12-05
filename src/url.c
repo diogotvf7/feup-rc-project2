@@ -114,3 +114,16 @@ void print_url(struct URL url)
     printf("port: %s\n", url.port);
     printf("path: %s\n", url.path);
 }
+
+const char *get_filename(const char *path)
+{
+    const char *filename = strrchr(path, '/');
+    if (filename == NULL)
+    {
+        return path;
+    }
+    else
+    {
+        return filename + 1;
+    }
+}
