@@ -103,3 +103,12 @@ It is possible to determine the length of a receiving frame by checking WireShar
 The loopback interface is a virtual interface that is always up and available after the operating system has booted. It is used to communicate with the operating system itself. It is important because it is used to test the network software without the need for any hardware network interfaces. With this, it is possible to periodically check if the connections are working properly. 
 ```
 </details>
+
+# Exp 3
+
+## Lab
+
+| PC    | eth  | ip            | mac               |
+| ----- | ---- | ------------- | ----------------- |
+| gnu64 | eth0 | 172.16.60.254 | 00:21:5a:5a:75:bb |
+| gnu64 | eth1 | 172.16.61.253 | 00:08:54:71:73:ed |

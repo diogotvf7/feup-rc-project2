@@ -30,4 +30,6 @@ struct URL parse_url(const char *arg);
 
 void print_url(struct URL url);
 
+const char *get_filename(const char *path);
+
 #endif
