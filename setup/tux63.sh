@@ -5,9 +5,9 @@ systemctl restart networking
 
 # config tux3 ip
 # CONNECTO TO ETH1
-ifconfig eth2 up
-ifconfig eth2 172.16.60.1/24
-ifconfig eth2
+ifconfig eth0 up
+ifconfig eth0 172.16.60.1/24
+ifconfig eth0
 
 read -n 1 -p "Set up the ip address in tuxY4 and tuxY2 then press any key to continue."
 
