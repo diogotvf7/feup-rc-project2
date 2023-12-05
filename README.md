@@ -112,3 +112,35 @@ The loopback interface is a virtual interface that is always up and available af
 | ----- | ---- | ------------- | ----------------- |
 | gnu64 | eth0 | 172.16.60.254 | 00:21:5a:5a:75:bb |
 | gnu64 | eth1 | 172.16.61.253 | 00:08:54:71:73:ed |
+
+
+
+<details>
+    <summary>How to configure bridge60? </summary>
+
+
+```bash
+Bridge60 is configured with the following commands:
+
+
+/interface bridge add name=bridge60
+/interface bridge port remove [find interface=ether9] 
+/interface bridge port remove [find interface=ether17]
+/interface bridge port add bridge=bridge60 interface=ether9
+/interface bridge port add bridge=bridge60 interface=ether17
+/interface bridge port add bridge=bridge50 interface=ether9
+/interface bridge port add bridge=bridge50 interface=ether17 
+
+
+This made it possible to connect the two computers(TUX3 and TUX4) to the same network,forming a smaller network. 
+```
+
+</details>
+<details>
+    <summary>How many broadcast domains are there? How can you conclude it from the logs?<summary>
+
+```
+Since we configured 2 bridges, we can conclude that there are 2 broadcast domains. This is because each bridge is a broadcast domain. We can conclude this from the logs because TUX3 obtained a response from TUX4, but not from TUX2. This means that TUX3 is in the same broadcast domain as TUX4, but not in the same broadcast domain as TUX2.
+```
+
+</details>
