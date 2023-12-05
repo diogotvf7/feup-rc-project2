@@ -16,8 +16,16 @@ route add -net 172.16.61.0/24 gw 172.16.60.254
 
 read -n 1 -p "Set up the router ip and then click any key to continue."
 
+arp -d 172.16.60.254 #Tux53
+
 # configure tuxY4 to be the default router
 route add default gw 172.16.60.254
 
 # configure DNS
 echo 'nameserver 172.16.2.1' > /etc/resolv.conf
+
+ping google.com
+
+#na dúvida
+$ ifconfig eth0 172.16.2.63/24
+$ route add default gw 172.16.2.254

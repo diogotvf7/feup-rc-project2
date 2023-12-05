@@ -137,7 +137,7 @@ This made it possible to connect the two computers(TUX3 and TUX4) to the same ne
 
 </details>
 <details>
-    <summary>How many broadcast domains are there? How can you conclude it from the logs?<summary>
+    <summary>How many broadcast domains are there? How can you conclude it from the logs?</summary>
 
 ```
 Since we configured 2 bridges, we can conclude that there are 2 broadcast domains. This is because each bridge is a broadcast domain. We can conclude this from the logs because TUX3 obtained a response from TUX4, but not from TUX2. This means that TUX3 is in the same broadcast domain as TUX4, but not in the same broadcast domain as TUX2.
