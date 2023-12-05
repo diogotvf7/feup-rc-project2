@@ -5,23 +5,20 @@
 
 int get_status(int sfd)
 {
-    char buffer[2000];
+    char buffer[1024];
+    ssize_t total_bytes_read = 0;
 
-    ssize_t bytes, total_bytes_read = 0;
-
-    usleep(100000);
-    while ((bytes = recv(sfd, buffer + total_bytes_read, sizeof buffer - total_bytes_read, 0)) > 0)
+    while (1)
     {
-        total_bytes_read += bytes;
         usleep(100000);
-    };
-
-    if (bytes < 0)
-    {
-        perror("recv");
-        exit(EXIT_FAILURE);
+        ssize_t bytes_read = recv(sfd, buffer, sizeof buffer - total_bytes_read, MSG_DONTWAIT);
+        if (bytes_read < 0)
+        {
+            buffer[total_bytes_read] = '\0';
+            break;
+        }
+        total_bytes_read += bytes_read;
     }
-    buffer[bytes] = '\0';
 
     int status;
     if (sscanf(buffer, "%d", &status) != 1)
@@ -29,33 +26,12 @@ int get_status(int sfd)
         fprintf(stderr, "Invalid status line: %s\n", buffer);
         exit(EXIT_FAILURE);
     }
-    printf("Full message:\n\"%s\"\n", buffer); // debug2
-    printf("Status: %d\n\n", status);          // debug2
+
+    // printf("Full message:\n\"%s\"\n", buffer); // debug2
+    // printf("Status: %d\n\n", status);          // debug2
 
     return status;
 }
-// int get_status(int sfd)
-// {
-//     char buffer[2000];
-//     ssize_t bytes = recv(sfd, buffer, sizeof buffer - 1, 0);
-//     if (bytes < 0)
-//     {
-//         perror("recv");
-//         exit(EXIT_FAILURE);
-//     }
-//     buffer[bytes] = '\0';
-
-//     int status;
-//     if (sscanf(buffer, "%d", &status) != 1)
-//     {
-//         fprintf(stderr, "Invalid status line: %s\n", buffer);
-//         exit(EXIT_FAILURE);
-//     }
-//     printf("Full message:\n\"%s\"\n", buffer); // debug2
-//     printf("Status: %d\n\n", status);          // debug2
-
-//     return status;
-// }
 
 int get_connection(const char *hostname, const char *port)
 {
@@ -110,14 +86,14 @@ void auth(int sfd, const char *username, const char *password)
     char buf[266];
     int command_length;
 
-    printf("1 Step -------------- (check if service ready for new user) | =220\n"); // debug1
+    // printf("1 Step -------------- (check if service ready for new user) | =220\n"); // debug1
     if (get_status(sfd) != SERVER_LOGIN_READY)
     {
         fprintf(stderr, "Service not ready for new user.\n");
         exit(EXIT_FAILURE);
     }
 
-    printf("2 Step ------------------------------------- (sending user) | \n"); // debug1
+    // printf("2 Step ------------------------------------- (sending user) | \n"); // debug1
     command_length = snprintf(buf, 266, "user %s\n", username);
     if (send(sfd, buf, command_length, 0) < 0)
     {
@@ -125,19 +101,22 @@ void auth(int sfd, const char *username, const char *password)
         exit(EXIT_FAILURE);
     }
 
-    printf("3 Step ------------------ (check if service needs password) | =331\n"); // debug1
-    if (get_status(sfd) == SERVER_PASSWORD_REQUIRED)
+    // printf("3 Step ------------------ (check if service needs password) | =331\n"); // debug1
+    if (get_status(sfd) != SERVER_PASSWORD_REQUIRED)
     {
-        printf("4 Step -------------------------------- (send password) |\n"); // debug1
-        command_length = snprintf(buf, 266, "pass %s\n", password);
-        if (send(sfd, buf, command_length, 0) < 0)
-        {
-            fprintf(stderr, "Error sending password (%s).\n", password);
-            exit(EXIT_FAILURE);
-        }
+        fprintf(stderr, "Error, server should expect password\n");
+        exit(EXIT_FAILURE);
     }
 
-    printf("5 Step -------------------- (check if login was successful) | =230\n"); // debug1
+    // printf("4 Step -------------------------------- (send password) |\n"); // debug1
+    command_length = snprintf(buf, 266, "pass %s\n", password);
+    if (send(sfd, buf, command_length, 0) < 0)
+    {
+        fprintf(stderr, "Error sending password (%s).\n", password);
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("5 Step -------------------- (check if login was successful) | =230\n"); // debug1
     if (get_status(sfd) != SERVER_LOGIN_SUCCESS)
     {
         fprintf(stderr, "Login failed.\n");
@@ -203,7 +182,11 @@ void request_file(int sfd, const char *path)
 
 void get_file(int psfd, const char *filename)
 {
-    FILE *fp = fopen(filename, "w");
+    char output_path[256];
+    strcpy(output_path, "output/");
+    strcat(output_path, filename);
+
+    FILE *fp = fopen(output_path, "w");
     if (fp == NULL)
     {
         fprintf(stderr, "Error opening file (%s).\n", filename);
@@ -214,8 +197,7 @@ void get_file(int psfd, const char *filename)
     ssize_t bytes;
     while ((bytes = recv(psfd, buf, sizeof buf - 1, 0)) > 0)
     {
-        buf[bytes] = '\0';
-        fprintf(fp, "%s", buf);
+        fwrite(buf, 1, bytes, fp);
     }
 
     fclose(fp);

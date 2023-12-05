@@ -7,19 +7,15 @@ CFLAGS = -Wall
 SRC = src/
 INCLUDE = include/
 BIN = bin/
+OUT = output/
 
 # ftp://[<user>:<password>@]<host>[:port][/<url-path>]
 
-# URL = ftp://user:password@ftp.up.pt:21/pub/kodi/timestamp.txt
-# URL = ftp://ftp.up.pt:21/pub/kodi/timestamp.txt
-# URL = ftp://ftp.up.pt/pub/kodi/timestamp.txt
-# URL = ftp://user@ftp.up.pt/pub/kodi/timestamp.txt
-# URL = ftp://ftp.up.pt:21
-# URL = ftp://ftp.up.pt
-# URL = ftp://ftp.up.pt:21/
 
-# URL = ftp://rcom:rcom@netlab1.fe.up.pt
-URL = ftp://ftp.up.pt/pub/kodi/robots.txt
+# URL = ftp://rcom:rcom@netlab1.fe.up.pt/files/pic1.jpg
+# URL = ftp://rcom:rcom@netlab1.fe.up.pt/pipe.txt
+# URL = ftp://ftp.up.pt/pub/kodi/robots.txt
+URL = ftp://ftp.up.pt/pub/kodi/timestamp.txt
 
 # Targets
 .PHONY: all
@@ -34,4 +30,4 @@ run: $(BIN)/main
 
 .PHONY: clean
 clean:
-	rm -f $(BIN)/main
+	rm -f $(BIN)/main $(OUT)/*
