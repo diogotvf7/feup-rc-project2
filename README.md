@@ -104,7 +104,7 @@ The loopback interface is a virtual interface that is always up and available af
 ```
 </details>
 
-# Exp 3
+# Exp 2
 
 ## Lab
 
@@ -141,6 +141,200 @@ This made it possible to connect the two computers(TUX3 and TUX4) to the same ne
 
 ```
 Since we configured 2 bridges, we can conclude that there are 2 broadcast domains. This is because each bridge is a broadcast domain. We can conclude this from the logs because TUX3 obtained a response from TUX4, but not from TUX2. This means that TUX3 is in the same broadcast domain as TUX4, but not in the same broadcast domain as TUX2.
+```
+
+</details>
+
+
+### Exp 3
+
+
+
+<details>
+    <summary>What are the commands required to configure this experience?</summary>
+
+```bash
+    ifconfig eth1 up
+    ifconfig eth1 172.16.61.253/24
+    /interface bridge port remove [find interface=etherXX]    (TUX62)
+    /interface bridge port add bridge=bridge61 interface=etherXX (TUX62)
+
+    In Tux64:
+    sysctlnet.ipv4.ip_forward=1
+    sysctlnet.ipv4.icmp_echo_ignore_broadcasts=0
+
+    route add -net  172.16.60.0/24 gw 172.16.61.253 # in Tux62
+    route add -net  172.16.61.0/24 gw 172.16.60.254 # in Tux63
+
+```
+
+</details>
+<details>
+    <summary>What routes are there in the tuxes? What are their meaning?</summary>
+
+```
+    There are 2 routes, 1 in Tux62 and another in Tux63. Since Tux64 is the common gateway, the route in Tux62 is to reach Tux63 and the route in Tux63 is to reach Tux62, passing throw Tux64.
+```
+
+</details>
+<details>
+    <summary>What information does an entry of the forwarding table contain?</summary>
+
+```
+    An entry of the forwarding table contains the destination network/address, the gateway and the netmask.
+```
+
+</details>
+<details>
+    <summary>What ARP messages, and associated MAC addresses, are observed and why?</summary>
+
+```
+    The exchanged ARP messages contain only the MAC addresses of Tux63 and Tux64 and not the final destination(Tux62). This occurs because of the existence of the route. Tux63 does not know the address of Tux62, it only knows the address of the gateaway (Tux64) that leads to Tux62.
+```
+
+</details>
+<details>
+    <summary>What ICMP packets are observed and why?</summary>
+
+```
+    The ICMP packets observed are the echo request and echo reply. This occurs because of the ping command. The echo request is sent by Tux62 to Tux63 and the echo reply is sent by Tux63 to Tux62.
+    Since it contains both Tux62 and Tux63 IP addresses, it is possible to conclude that the configuration is correct.
+```
+
+</details>
+<details>
+    <summary>What are the IP and MAC addresses associated to ICMP packets and why?</summary>
+
+```
+    The IP and MAC addresses associated to ICMP packets are the IP addresses of Tux62 and Tux63. It also contains de MAC address of Tux64 (computer that connects the bridges 60 and 61).
+```
+</details>
+
+
+### Exp 4
+
+<details>
+    <summary>How to configure a static route in a commercial router?</summary>
+
+```
+    First it is necessary to reset the route configuration. Then, we need to add it to the internal network (to the corresponding bridge) and assign an internal IP and an external IP.
+``` 
+
+</details>
+<details>
+    <summary>What are the paths followed by the packets in the experiments carried out and why?</summary>
+
+```
+In the first experience, there was no connection between Tux62 and Tux64, because of that, data packets were forwarded (ICMP redirect) through the router to the destination IP address.
+
+In the second experience, there was no forwarding because the connection from Tux62 to Tux64 was already implemented, making it a shorter path.
+```
+
+</details>
+<details>
+    <summary>How to configure NAT in a commercial router?</summary>
+
+```
+    In router terminal, we need to run the command `/ip firewall nat enable 0`.
+```
+
+</details>
+<details>
+    <summary>What does NAT do?</summary>
+
+```
+    NAT (Network Address Translation) is a process that modifies the IP address of a packet. It is used to translate private IP addresses into public IP addresses. It is also used to translate public IP addresses into private IP addresses. It is used to hide the private IP addresses of a network from the public IP addresses of the Internet. It is also used to hide the public IP addresses of the Internet from the private IP addresses of a network.
+    Reducing the number of public addresses.
+```
+</details>
+
+
+### Exp 5
+
+» How to configure the DNS service in a host? » What packets are exchanged by DNS and what information is transported
+
+<details>
+    <summary>How to configure the DNS service in a host?</summary>
+
+```
+    In the host terminal, we need to run the command `sudo nano /etc/resolv.conf` and add the following lines:
+    nameserver <DNS IP address>
+```
+
+</details>
+<details>
+    <summary>What packets are exchanged by DNS and what information is transported?</summary>
+
+```
+    The DNS packets exchanged are the DNS query and the DNS response. The DNS query contains the domain name and the DNS response contains the IP address of the domain name. Making it possible to translate the domain name into an IP address in router.
+```
+</details>
+
+
+### Exp 6
+
+» How many TCP connections are opened by your FTP application? » In what connection is transported the FTP control information? » What are the phases of a TCP connection? » How does the ARQ TCP mechanism work? What are the relevant TCP fields? What relevant information can be observed in the logs? » How does the TCP congestion control mechanism work? What are the relevant fields. How did the throughput of the data connection evolve along the time? Is it according to the TCP congestion control mechanism? » Is the throughput of a TCP data connections disturbed by the appearance of a second TCP connection? How?
+
+
+<details>
+    <summary>How many TCP connections are opened by your FTP application?</summary>
+
+```
+    The FTP application opens 2 TCP connections, one for the control information and another for the data.
+```
+
+</details>
+<details>
+    <summary>In what connection is transported the FTP control information?</summary>
+
+```
+    The FTP control information is transported in the TCP connection that uses the port 21.
+```
+
+</details>
+<details>
+    <summary>What are the phases of a TCP connection?</summary>
+
+```
+    The phases of a TCP connection are:
+    - DNS: The client sends a DNS query to the DNS server to translate the domain name into an IP address.
+    - Connection: The client sends a SYN packet to the server. The server responds with a SYN ACK packet. The client responds with an ACK packet.
+    - Configuration: The client sends a PORT packet to the server. The server responds with a 200 OK packet.
+    - File transfer: The client sends a RETR packet to the server. The server responds with a 150 Opening data connection packet. The server sends a data packet to the client. The client responds with a 226 Closing data connection packet.
+    - Finalization: The client sends a FIN packet to the server. The server responds with a FIN ACK packet. The client responds with an ACK packet.
+
+```
+
+</details>
+<details>
+    <summary>How does the ARQ TCP mechanism work? What are the relevant TCP fields? What relevant information can be observed in the logs?</summary>
+
+```
+    ARQ TCP mechanism works by retransmitting packets in a congested network. A network is said to be congested from the moment packets are lost. It is necessary to send several packets at once (Additive Increase) until this happens. Slow start is used when instead of adding one unit to the CongestionWindow in each transmission, the same method is used but in exponential mode in base two. The loss of the packet can be given:
+    - Timeout: The packet is lost because it takes too long to arrive.
+    - Triple duplicate ACK: The packet is lost because it is sent several times.
+    The relevant TCP fields are
+
+```
+
+</details>
+<details>
+    <summary>How does the TCP congestion control mechanism work? What are the relevant fields. How did the throughput of the data connection evolve along the time? Is it according to the TCP congestion control mechanism?</summary>
+
+```
+    (CHANGE AFTER PRESENTATION)
+    Automatic Repeat Request serve para fazer retransmissão numa rede congestionada. Uma rede diz-se congestionada a partir do momento que se perdem pacotes. É necessário o envio de vários pacotes de uma vez (Additive Increase) até que tal aconteça. Usa-se slow start quando em vez de adicionar uma unidade à CongestionWindow em cada transmissão, usa-se o mesmo método mas em modo exponencial na base dois. A perda do pacote pode ser dada:
+    - Por timeout. Ocorre um Multiplicative Decrease, passando a Congestion Window a 1 e aumentando novamente até metade do valor obtido por mecanismo de slow start. A partir de metade o Additive Increase passa a ser incremental de uma unidade;
+    - Por 3 ACKs seguidos. Ocorre um Multiplicative Decrease, passando a Congestion Window a metade e Additive Increase passa a ser incremental de uma unidade;
+```
+
+</details>
+
+<details>
+    <summary>Is the throughput of a TCP data connections disturbed by the appearance of a second TCP connection? How?</summary>
+
+```
+Cada emissor determina a capacidade da comunicação para poder enviar mais ou menos pacotes. Para isso há mais um parâmetro na conexão (CongestionWindow). Se o nível de congestionamento da rede aumenta a CongestionWindow diminui e vice-versa.
 ```
 
 </details>
