@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  22 DEC 2023 22:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  22 DEC 2023 23:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -218,7 +218,7 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
-Package hyperref Info: Option `colorlinks' set `true' on input line 82.
+Package hyperref Info: Option `colorlinks' set `true' on input line 83.
  (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count282
@@ -226,24 +226,24 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -298,16 +298,16 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 103.
+Package hyperref Info: Link coloring ON on input line 109.
  (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
 \c@lstlisting=\count289
-<images/uporto-feup.pdf, id=28, 338.26375pt x 126.4725pt>
+<images/uporto-feup.pdf, id=32, 338.26375pt x 126.4725pt>
 File: images/uporto-feup.pdf Graphic file (type pdf)
 <use images/uporto-feup.pdf>
-Package pdftex.def Info: images/uporto-feup.pdf  used on input line 108.
+Package pdftex.def Info: images/uporto-feup.pdf  used on input line 114.
 (pdftex.def)             Requested size: 391.28378pt x 146.301pt.
  [1
 
@@ -324,27 +324,27 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout4 = `report.toc'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
 []\OT1/cmr/m/n/10.95 Aprendemos como
  []
 
 
-Underfull \hbox (badness 3492) in paragraph at lines 147--148
+Underfull \hbox (badness 3492) in paragraph at lines 153--154
 []\OT1/cmr/m/n/10.95 RFCs s~ao doc-u-men-tos que de-screvem
  []
 
 
-Underfull \hbox (badness 4441) in paragraph at lines 147--148
+Underfull \hbox (badness 4441) in paragraph at lines 153--154
 \OT1/cmr/m/n/10.95 os padr~oes da in-ter-net. Con-sult^^Samos,
  []
 
 
-Underfull \hbox (badness 2080) in paragraph at lines 147--148
+Underfull \hbox (badness 2080) in paragraph at lines 153--154
 \OT1/cmr/m/n/10.95 o [][]RFC1738[][], para al^^Sem de out-ras doc-u-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 []\OT1/cmr/m/n/10.95 Procur^^Samos
  []
 
@@ -353,29 +353,51 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
+Underfull \hbox (badness 1189) in paragraph at lines 186--192
+\OT1/cmr/m/n/10.95 us-ado ^^Se o []TCP/IP[]. A cria^^Xc~ao das []sock-ets[] ^^Se
+ []
+
+
+Underfull \hbox (badness 1210) in paragraph at lines 186--192
+\OT1/cmr/m/n/10.95 da fun^^Xc~ao []send[] e a leitura das re-spostas do
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--192
+
+ []
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.177 \end{document}
-                     [1
+l.192 
+       [1
+
+]
+Underfull \hbox (badness 5203) in paragraph at lines 206--206
+[]\OT1/cmr/bx/n/12 Exp 4 - Con-figura^^Xc~ao de um
+ []
+
+[2
 
 ] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: F22433FFF02F349FB1215121322CBE2C;1160.
+(rerunfilecheck)             Checksum: 0FCD3BFDC80458B32E6CB30D1813B9EE;1600.
  ) 
 Here is how much of TeX's memory you used:
- 11038 strings out of 477985
- 168590 string characters out of 5840057
- 1872388 words of memory out of 5000000
- 31098 multiletter control sequences out of 15000+600000
+ 11052 strings out of 477985
+ 168712 string characters out of 5840057
+ 1879388 words of memory out of 5000000
+ 31102 multiletter control sequences out of 15000+600000
  517957 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,5n,76p,457b,1210s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,5n,76p,531b,1210s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
-Output written on report.pdf (2 pages, 102857 bytes).
+Output written on report.pdf (3 pages, 107278 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 120 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
+ 24 named destinations out of 1000 (max. 500000)
+ 62 words of extra memory for PDF output out of 10000 (max. 10000000)
 

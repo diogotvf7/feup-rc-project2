@@ -3,5 +3,6 @@
 \contentsline {section}{\numberline {2}Desenvolvimento da aplicação}{1}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Estrutura do código}{1}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Fluxo do programa}{1}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Configurar e analisar o funcionamento de uma rede}{1}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Exp 1- Configurar o IP de uma rede}{1}{subsection.3.1}%
+\contentsline {section}{\numberline {3}Configurar e analisar o funcionamento de uma rede}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Exp 1 - Configurar o IP de uma rede}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Exp 4 - Configuração de um Router Comercial e Implementação de NAT}{2}{subsection.3.2}%

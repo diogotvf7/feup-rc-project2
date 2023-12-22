@@ -61,7 +61,8 @@
 }{}
 
 % ---------------------------Custom colors 
-\definecolor{text-hl}{RGB}{190, 100, 10}
+\definecolor{text-hl1}{RGB}{190, 100, 10}
+\definecolor{text-hl2}{RGB}{0, 128, 128}
 \definecolor{link}{RGB}{50, 90, 150}
 
 % ----------------------c-darktheme colors
@@ -82,8 +83,13 @@
 }
 
 % -------------------------Custom commands 
-\newcommand{\hl}[1]{\textcolor{text-hl}{#1}}
-
+\newcommand{\hl}[2][1]{%
+  \ifnum#1=1\relax
+    \textcolor{text-hl1}{#2}%
+  \else
+    \textcolor{text-hl2}{#2}% Default to text-hl2
+  \fi
+}
 
 %%========================================
 %% Start of document
@@ -147,7 +153,7 @@ Através da realização deste programa aprofundamos os nossos conhecimentos sob
     \item[RFCs] RFCs são documentos que descrevem os padrões da internet. Consultámos, como referido anteriormente, o \href{https://datatracker.ietf.org/doc/html/rfc959}{RFC959} e o \href{https://datatracker.ietf.org/doc/html/rfc1738}{RFC1738}, para além de outras documentações, para entender o funcionamento do protocolo \hl{FTP} e da sintaxe do \hl{URL}.
     \item[Sockets] Aprendemos a usar \hl{sockets} em \hl{C} como forma de comunicação entre o cliente e o servidor.
     \item[DNS (Domain Name System)] Procurámos entender o funcionamento do \hl{DNS} e como é que este é usado para traduzir um \hl{URL} num endereço \hl{IP}.
-    \item[UNIX] Aprendemos alguns comandos de \hl{UNIX} que usamos no nosso programa (ex.: \hl{getaddrinfo}, \hl{socket}, \hl{connect}, \hl{recv}, \hl{send})
+    \item[UNIX] Aprendemos alguns comandos de \hl{UNIX} que usamos no nosso programa (ex.: \hl[2]{getaddrinfo}, \hl[2]{socket}, \hl[2]{connect}, \hl[2]{recv}, \hl[2]{send})
 \end{description}
 
 \subsection{Estrutura do código}
@@ -164,15 +170,46 @@ O programa é executado do seguinte comando:
 ./download ftp://[<user>:<password>@]<host>/<url-path>
 \end{bash-darktheme}
 
+O fluxo do programa será o seguinte:
+
+\begin{enumerate}
+    \item \hl{Parse} do \hl{URL} para obter os seguintes campos: \hl[2]{user} (opcional), \hl[2]{password} (opcional), \hl[2]{host}, \hl[2]{port} (opcional, é usado o valor 21 por default no protocolo FTP) e \hl[2]{url-path}.
+    \item Criação de uma \hl{socket} que, através de uma ligação TCP/IP, inicia uma conexão com o \hl[2]{host} na porta \hl[2]{port}.
+    \item Envio dos comandos \hl{USER} e \hl{PASS} para o servidor juntos dos valores \hl[2]{user} e \hl[2]{password}, respetivamente. Caso estes valores não tenham sido especificados, usa-se o valor \hl{anonymous}.
+    \item Envio do comando \hl{PASV} para o servidor para que este abra uma porta à qual nos conectaremos para futuramente recebermos o ficheiro.
+    \item Criação de uma nova \hl{socket} que, através de uma ligação TCP/IP, inicia uma conexão com a nova porta aberta pelo servidor.
+    \item Envio do comando \hl{RETR} através da porta inicial para o servidor junto do valor \hl[2]{url-path} para que o servidor nos envie o recurso especificado.
+    \item Leitura do ficheiro através da \hl{socket} criada no ponto 5 e escrita do mesmo para um ficheiro local.
+    \item Fecho das \hl{sockets} criadas.
+\end{enumerate}
+
+O \hl{parse} do \hl{URL} é feito a partir da função \hl[2]{parse\_url} que recebe uma \hl[2]{string} e devolve uma \hl[2]{struct} \hl{URL} com os campos especificados no ponto 1. Esta função usa uma máquina de estados e expressões regulares. \\
+Todo o processo de comunicação entre o cliente e o servidor é feito através de \hl{sockets} e o protocolo usado é o \hl{TCP/IP}. A criação das \hl{sockets} é feita através da função \hl[2]{getaddrinfo} que recebe o \hl[2]{hostname} e a \hl[2]{porta} e devolve uma \hl[2]{struct} \hl{addrinfo} com os campos necessários para a criação da \hl{socket}. \\
+As \hl[2]{sockets} são criadas através da função \hl{socket} e são feitas as respetivas ligações através da função \hl[2]{connect}. \\  
+O envio de comandos pelas \hl[2]{sockets} é feito através da função \hl[2]{send} e a leitura das respostas do servidor é feita através da função \hl[2]{recv}. \\
+Antes de ser enviado qualquer comando para o servidor, primeiro é feita a leitura do código de status do servidor através da função \hl[2]{recv}, de modo a termos uma noção do estado do servidor. \\
+A escrita do ficheiro no disco é feita através da função \hl[2]{write}. \\
 
 \section{Configurar e analisar o funcionamento de uma rede}
 
 O objetivo deste conjunto de experiências é configurar uma rede de computadores de modo a que estes tenham acesso à internet para instalar ficheiros a partir de um servidor remoto usando o protocolo FTP desenvolvido ou seja, a aplicação.
 
-
-\subsection{Exp 1- Configurar o IP de uma rede}
+\subsection{Exp 1 - Configurar o IP de uma rede}
 
 O objetivo desta experiência é conectar o Tux-3 ao Tux-4 a partir do MicroTik Switch.
+
+
+
+% ...
+
+
+\subsection{Exp 4 - Configuração de um Router Comercial e Implementação de NAT}
+
+
+
+
+
+
 
 \end{document}
 
