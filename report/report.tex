@@ -1,0 +1,177 @@
+\documentclass[11pt,a4paper,twocolumn]{report}
+
+% --------------------------------Packages
+\usepackage[margin=.75in]{geometry}
+\usepackage{indentfirst}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+
+% -----------------------Images path setup
+\graphicspath{{./images/}}
+
+% -----------------------Code blocks setup 
+\lstnewenvironment{c-darktheme}{
+    \lstset{
+        language=C,                        % choose the language of the code
+        backgroundcolor=\color{cb-background},
+        basicstyle=\footnotesize\ttfamily\color{cb-foreground},
+        keywordstyle=\color{cb-keyword}\bfseries,
+        commentstyle=\color{cb-comment},
+        stringstyle=\color{cb-string},
+        numberstyle=\color{cb-number},
+        emphstyle=\color{cb-preprocessor},
+        keywordstyle=\bfseries,
+        numbers=left,                      % where to put the line-numbers
+        numberstyle=\scriptsize\texttt,    % the size of the fonts that are used for the line-numbers
+        stepnumber=1,                      % the step between two line-numbers. If it's 1 each line will be numbered
+        numbersep=8pt,                     % how far the line-numbers are from the code
+        float=htb,
+        aboveskip=3mm,
+        belowskip=3mm,
+        showspaces=false,                  % show spaces adding particular underscores
+        showstringspaces=false,            % underline spaces within strings
+        showtabs=false,                    % show tabs within strings adding particular underscores
+        tabsize=2,                         % sets default tabsize to 2 spaces
+        captionpos=b,                      % sets the caption-position to bottom
+        breaklines=true,                   % sets automatic line breaking
+        breakatwhitespace=false,           % sets if automatic breaks should only happen at whitespace
+        escapeinside={\%*}{*)},            % if you want to add a comment within your code
+        morekeywords={*,var,template,new}  % if you want to add more keywords to the set
+        moretypes={}                       % if you want to add more types to the set
+    }
+}{}
+
+\lstnewenvironment{bash-darktheme}{
+    \lstset{
+        language=bash,
+        aboveskip=3mm,
+        belowskip=3mm,
+        showstringspaces=false,
+        backgroundcolor=\color{cb-background},
+        basicstyle=\footnotesize\ttfamily\color{cb-foreground}\fontfamily{NotoMono},
+        keywordstyle=\color{cb-keyword},
+        commentstyle=\color{cb-comment},
+        stringstyle=\color{cb-string},
+        breaklines=true,
+    }
+}{}
+
+% ---------------------------Custom colors 
+\definecolor{text-hl}{RGB}{190, 100, 10}
+\definecolor{link}{RGB}{50, 90, 150}
+
+% ----------------------c-darktheme colors
+\definecolor{cb-background}{HTML}{1E1E1E}
+\definecolor{cb-foreground}{HTML}{D4D4D4}
+\definecolor{cb-comment}{HTML}{6A9955}
+\definecolor{cb-keyword}{HTML}{569cd6}
+\definecolor{cb-string}{HTML}{ce9178}
+\definecolor{cb-number}{HTML}{b5cea8}
+\definecolor{cb-preprocessor}{HTML}{569cd6}
+
+% -----------------------------Links setup 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=link,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+% -------------------------Custom commands 
+\newcommand{\hl}[1]{\textcolor{text-hl}{#1}}
+
+
+%%========================================
+%% Start of document
+%%========================================
+
+% \makeindex
+
+\title{%
+  Redes de computadores \\
+  \large 2º trabalho prático}
+\author{%
+        Diogo Fernandes (202108752) \\ 
+        José Sereno (202108729)}
+\def\course{Licenciatura em Engenharia Informática e Computação}
+\date{Dezembro 2023}
+
+\begin{document}
+
+% -----------------------------------Title page
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/uporto-feup.pdf} 
+        \vspace{1cm}
+
+        \LARGE
+        \textbf{\thetitle}
+        \vfill
+
+        \large
+        \textbf{\course}
+        \vspace{0.5cm}
+
+        \large
+        \textbf{\theauthor}
+        \vspace{0.5cm}
+
+        \large
+        \thedate
+    \end{center}
+\end{titlepage}
+% ---------------------------------------------
+
+\tableofcontents
+
+\chapter{Introdução}
+
+Este projeto teve dois objetivos:
+\begin{enumerate}
+    \item Desenvolver uma aplicação em \hl{C} que impletmente o protocolo \hl{FTP} - descrito no \href{https://datatracker.ietf.org/doc/html/rfc959}{RFC959} - para fazer o download de um ficheiro através de um \hl{URL} - a sintaxe deste URL deveria seguir o \href{https://datatracker.ietf.org/doc/html/rfc1738}{RFC1738}.
+    \item Configurar e analisar o funcionamento de uma rede de computadores.
+\end{enumerate}
+
+\section{Desenvolvimento da aplicação}
+
+O programa \hl{download} foi desenvolvido em \hl{C} e tem como objetivo fazer o download de um ficheiro através de um \hl{URL} que segue a sintaxe do \href{https://datatracker.ietf.org/doc/html/rfc1738}{RFC1738}.
+Através da realização deste programa aprofundamos os nossos conhecimentos sobre os seguintes temas:
+\begin{description}
+    \item[Client-Server \& TCP/IP] Aprendemos como se dá a comunicação entre um cliente e um servidor através do protocolo \hl{TCP/IP}.
+    \item[RFCs] RFCs são documentos que descrevem os padrões da internet. Consultámos, como referido anteriormente, o \href{https://datatracker.ietf.org/doc/html/rfc959}{RFC959} e o \href{https://datatracker.ietf.org/doc/html/rfc1738}{RFC1738}, para além de outras documentações, para entender o funcionamento do protocolo \hl{FTP} e da sintaxe do \hl{URL}.
+    \item[Sockets] Aprendemos a usar \hl{sockets} em \hl{C} como forma de comunicação entre o cliente e o servidor.
+    \item[DNS (Domain Name System)] Procurámos entender o funcionamento do \hl{DNS} e como é que este é usado para traduzir um \hl{URL} num endereço \hl{IP}.
+    \item[UNIX] Aprendemos alguns comandos de \hl{UNIX} que usamos no nosso programa (ex.: \hl{getaddrinfo}, \hl{socket}, \hl{connect}, \hl{recv}, \hl{send})
+\end{description}
+
+\subsection{Estrutura do código}
+
+O código do programa \hl{download} está dividido em 3 ficheiros: \hl{download.c}, \hl{server.c} e \hl{url.h}.
+É no ficheiro \hl{download.c} onde se encontra a função \hl{main} - onde se percebe o fluxo do programa. O ficheiro \hl{server.c} contém as funções que implementam o protocolo \hl{FTP} e o ficheiro \hl{url.h} contém as funções que permitem fazer o \hl{parse} do \hl{URL}.
+O programa \hl{download} é compilado através do comando \hl{make} e é executado da seguinte forma:
+
+\subsection{Fluxo do programa}
+
+O programa é executado do seguinte comando:
+
+\begin{bash-darktheme}
+./download ftp://[<user>:<password>@]<host>/<url-path>
+\end{bash-darktheme}
+
+
+\section{Configurar e analisar o funcionamento de uma rede}
+
+O objetivo deste conjunto de experiências é configurar uma rede de computadores de modo a que estes tenham acesso à internet para instalar ficheiros a partir de um servidor remoto usando o protocolo FTP desenvolvido ou seja, a aplicação.
+
+
+\subsection{Exp 1- Configurar o IP de uma rede}
+
+O objetivo desta experiência é conectar o Tux-3 ao Tux-4 a partir do MicroTik Switch.
+
+
+\end{document}
+
