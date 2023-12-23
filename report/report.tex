@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,twocolumn]{article}
+\documentclass[11pt,a4paper]{article}
 
 % --------------------------------Packages
 \usepackage[margin=.75in]{geometry}
@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{multicol}
 
 % -----------------------Images path setup
 \graphicspath{{./images/}}
@@ -16,32 +17,16 @@
 % -----------------------Code blocks setup 
 \lstnewenvironment{c-darktheme}{
     \lstset{
-        language=C,                        % choose the language of the code
-        backgroundcolor=\color{cb-background},
-        basicstyle=\footnotesize\ttfamily\color{cb-foreground},
-        keywordstyle=\color{cb-keyword}\bfseries,
-        commentstyle=\color{cb-comment},
-        stringstyle=\color{cb-string},
-        numberstyle=\color{cb-number},
-        emphstyle=\color{cb-preprocessor},
-        keywordstyle=\bfseries,
-        numbers=left,                      % where to put the line-numbers
-        numberstyle=\scriptsize\texttt,    % the size of the fonts that are used for the line-numbers
-        stepnumber=1,                      % the step between two line-numbers. If it's 1 each line will be numbered
-        numbersep=8pt,                     % how far the line-numbers are from the code
-        float=htb,
+        language=C,
         aboveskip=3mm,
         belowskip=3mm,
-        showspaces=false,                  % show spaces adding particular underscores
-        showstringspaces=false,            % underline spaces within strings
-        showtabs=false,                    % show tabs within strings adding particular underscores
-        tabsize=2,                         % sets default tabsize to 2 spaces
-        captionpos=b,                      % sets the caption-position to bottom
-        breaklines=true,                   % sets automatic line breaking
-        breakatwhitespace=false,           % sets if automatic breaks should only happen at whitespace
-        escapeinside={\%*}{*)},            % if you want to add a comment within your code
-        morekeywords={*,var,template,new}  % if you want to add more keywords to the set
-        moretypes={}                       % if you want to add more types to the set
+        showstringspaces=false,
+        backgroundcolor=\color{cb-background},
+        basicstyle=\footnotesize\ttfamily\color{cb-foreground},
+        keywordstyle=\color{cb-keyword},
+        commentstyle=\color{cb-comment},
+        stringstyle=\color{cb-string},
+        breaklines=true,
     }
 }{}
 
@@ -107,7 +92,7 @@
 \date{Dezembro 2023}
 
 \begin{document}
-
+    
 % -----------------------------------Title page
 \begin{titlepage}
     \begin{center}
@@ -133,6 +118,8 @@
 % ---------------------------------------------
 
 \tableofcontents
+
+\begin{multicols}{2}
 
 \section{Introdução}
 
@@ -505,8 +492,9 @@ A taxa de transferência numa ligação de dados TCP é perturbada pelo aparecim
 
 Com a realização completa e correta das experiências, como também da aplicação de download. Foi possível aprender mais sobre o funcionamento e configuração de uma rede como também e sobre os protocolos envolvidos na transferência dos dados, tanto ao longo da propagação pela network layer como na link layer.
 
-\section{Anexos}
+\end{multicols}
 
+\section{Anexos}
 
 \subsection{Código}
 
@@ -863,7 +851,6 @@ void get_file(int psfd, const char *filename)
 
     fclose(fp);
 }
-
 \end{c-darktheme}
 % ===================
 
@@ -1041,8 +1028,7 @@ int main(int argc, char *argv[])
     \centering
     \includegraphics[width=0.8\textwidth]{images/exp2-ping3-2.png}
     \caption{Experiência 2 - TUX63 -> TUX62}
-
-\end{document}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -1079,4 +1065,94 @@ int main(int argc, char *argv[])
     \includegraphics[width=0.8\textwidth]{images/exp2-ping2-2-broadcast.png}
     \caption{Experiência 2 - TUX62 -> TUX62}
 \end{figure}
+
+\subsubsection{Experiência 3}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia3-captura_4-eth0.png}
+    \caption{Experiência 2 - TUX62 -> TUX62}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia3-captura_4-eth1.png}
+    \caption{Experiência 2 - TUX62 -> TUX62}
+\end{figure}
+
+\subsubsection{Experiência 4}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping2-3-redirect.png}
+    \caption{Experiência 4 - TUX62 -> TUX63 (redirects desativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping2-3-w_redirect.png}
+    \caption{Experiência 4 - TUX62 -> TUX63 (redirects ativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping3-2.png}
+    \caption{Experiência 4 - TUX63 -> TUX62 (redirects desativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping3-4.png}
+    \caption{Experiência 4 - TUX63 -> TUX64 (redirects desativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping3-Rc.png}
+    \caption{Experiência 4 - TUX63 -> TUX64 (redirects ativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping3-Router.png}
+    \caption{Experiência 4 - TUX63 -> TUX64 (redirects ativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-ping3-Router2.png}
+    \caption{Experiência 4 - TUX63 -> TUX64 (redirects ativados)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia4-traceroutes.png}
+    \caption{Experiência 4 - TUX63 -> TUX64 (redirects ativados)}
+\end{figure}
+
+\subsubsection{Experiência 5}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia5.png}
+    \caption{Experiência 5 - TUX62 -> TUX63}
+\end{figure}
+
+\subsubsection{Experiência 6}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia6.png}
+    \caption{Experiência 5 - TUX62 -> TUX63}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/experiencia6-cont.png}
+    \caption{Experiência 5 - TUX62 -> TUX63}
+\end{figure}
+
+
+\end{document}
+
+
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  23 DEC 2023 22:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  23 DEC 2023 23:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -218,32 +218,101 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
-Package hyperref Info: Option `colorlinks' set `true' on input line 83.
+ (/usr/share/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
+\c@tracingmulticols=\count282
+\mult@box=\box55
+\multicol@leftmargin=\dimen159
+\c@unbalance=\count283
+\c@collectmore=\count284
+\doublecol@number=\count285
+\multicoltolerance=\count286
+\multicolpretolerance=\count287
+\full@width=\dimen160
+\page@free=\dimen161
+\premulticols=\dimen162
+\postmulticols=\dimen163
+\multicolsep=\skip54
+\multicolbaselineskip=\skip55
+\partial@page=\box56
+\last@line=\box57
+\maxbalancingoverflow=\dimen164
+\mult@rightbox=\box58
+\mult@grightbox=\box59
+\mult@firstbox=\box60
+\mult@gfirstbox=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\c@minrows=\count288
+\c@columnbadness=\count289
+\c@finalcolumnbadness=\count290
+\last@try=\dimen165
+\multicolovershoot=\dimen166
+\multicolundershoot=\dimen167
+\mult@nat@firstbox=\box98
+\colbreak@box=\box99
+\mc@col@check@num=\count291
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 68.
  (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count282
-\l__pdf_internal_box=\box55
+\l__color_backend_stack_int=\count292
+\l__pdf_internal_box=\box100
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -266,14 +335,14 @@ LaTeX Font Info:    ... okay on input line 109.
 * \headsep=25.0pt
 * \topskip=11.0pt
 * \footskip=30.0pt
-* \marginparwidth=4.0pt
+* \marginparwidth=50.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
 * \skip\footins=10.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
-* \@twocolumntrue
+* \@twocolumnfalse
 * \@twosidefalse
 * \@mparswitchfalse
 * \@reversemarginfalse
@@ -281,16 +350,16 @@ LaTeX Font Info:    ... okay on input line 109.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count283
-\scratchdimen=\dimen159
-\scratchbox=\box56
-\nofMPsegments=\count284
-\nofMParguments=\count285
+\scratchcounter=\count293
+\scratchdimen=\dimen168
+\scratchbox=\box101
+\nofMPsegments=\count294
+\nofMParguments=\count295
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count286
-\MPscratchDim=\dimen160
-\MPnumerator=\count287
-\makeMPintoPDFobject=\count288
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen169
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
 \everyMPtoPDFconversion=\toks22
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -298,19 +367,18 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 109.
+Package hyperref Info: Link coloring ON on input line 94.
  (./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
-\c@lstlisting=\count289
-<images/uporto-feup.pdf, id=221, 338.26375pt x 126.4725pt>
+\c@lstlisting=\count299
+<images/uporto-feup.pdf, id=281, 338.26375pt x 126.4725pt>
 File: images/uporto-feup.pdf Graphic file (type pdf)
 <use images/uporto-feup.pdf>
-Package pdftex.def Info: images/uporto-feup.pdf  used on input line 114.
+Package pdftex.def Info: images/uporto-feup.pdf  used on input line 99.
 (pdftex.def)             Requested size: 391.28378pt x 146.301pt.
  [1
-
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/uporto-feup.pdf>] (./report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -320,128 +388,21 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--10
- [][] [][][]\OT1/cmr/m/n/10.95 Quais s~ao os co-man-dos 
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 10--10
- \OT1/cmr/m/n/10.95 necess^^Sarios para esta ex- 
- []
-
-
-Underfull \hbox (badness 1189) in paragraph at lines 13--13
- [][] [][][]\OT1/cmr/m/n/10.95 Que pa-cotes ^^Se que o co- 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--16
- [][] [][][]\OT1/cmr/m/n/10.95 Como de-ter-mi-nar o 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--16
- \OT1/cmr/m/n/10.95 tamanho de um pa-cote 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
- [][] [][][]\OT1/cmr/m/n/10.95 Quais s~ao os co-man-dos 
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 22--22
- \OT1/cmr/m/n/10.95 necess^^Sarios para esta ex- 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--27
- [][] [][][]\OT1/cmr/m/n/10.95 Quais s~ao os co-man-dos 
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 27--27
- \OT1/cmr/m/n/10.95 necess^^Sarios para esta ex- 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--33
- [][] [][][]\OT1/cmr/m/n/10.95 Quais s~ao os co-man-dos 
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 33--33
- \OT1/cmr/m/n/10.95 necess^^Sarios para esta ex- 
- []
-
-
-Underfull \hbox (badness 4193) in paragraph at lines 36--36
- [][] [][][]\OT1/cmr/m/n/10.95 Como con-fig-u-rar o NAT 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
- [][] [][][]\OT1/cmr/m/n/10.95 Quais s~ao os co-man-dos 
- []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 42--42
- \OT1/cmr/m/n/10.95 necess^^Sarios para esta ex- 
- []
-
-
-Underfull \hbox (badness 1077) in paragraph at lines 43--43
- [][] [][][] \OT1/cmr/m/n/10.95 Como con-fig-u-rar o DNS 
- []
-
-
-Underfull \hbox (badness 1072) in paragraph at lines 49--49
- [][] [][][]\OT1/cmr/m/n/10.95 Em que conex~ao ^^Se trans- 
- []
-
-
-Underfull \hbox (badness 3260) in paragraph at lines 49--49
- \OT1/cmr/m/n/10.95 portada a in-forma^^Xc~ao de 
- []
-
-
-Underfull \hbox (badness 5756) in paragraph at lines 53--53
- \OT1/cmr/m/n/10.95 de uma se-gunda liga^^Xc~ao 
- []
-
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.54 ...}{\numberline {4}Conclusão}{8}{section.4}
-                                                  % [1
-
-])
+l.51 ...e TCP relevantes?}{8}{subsubsection.3.6.5}
+                                                  % [1])
 \tf@toc=\write4
 \openout4 = `report.toc'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 []\OT1/cmr/m/n/10.95 Aprendemos como
  []
 
 
-Underfull \hbox (badness 3492) in paragraph at lines 153--154
-[]\OT1/cmr/m/n/10.95 RFCs s~ao doc-u-men-tos que de-screvem
- []
-
-
-Underfull \hbox (badness 4441) in paragraph at lines 153--154
-\OT1/cmr/m/n/10.95 os padr~oes da in-ter-net. Con-sult^^Samos,
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 153--154
-\OT1/cmr/m/n/10.95 o [][]RFC1738[][], para al^^Sem de out-ras doc-u-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
 []\OT1/cmr/m/n/10.95 Procur^^Samos
  []
 
@@ -449,62 +410,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 155--156
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-Underfull \hbox (badness 1189) in paragraph at lines 186--192
-\OT1/cmr/m/n/10.95 us-ado ^^Se o []TCP/IP[]. A cria^^Xc~ao das []sock-ets[] ^^Se
- []
-
-
-Underfull \hbox (badness 1210) in paragraph at lines 186--192
-\OT1/cmr/m/n/10.95 da fun^^Xc~ao []send[] e a leitura das re-spostas do
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 186--192
+) [2]
+Underfull \hbox (badness 10000) in paragraph at lines 173--179
 
  []
 
-[2] [3]
-Underfull \hbox (badness 1014) in paragraph at lines 253--253
-[]\OT1/cmr/bx/n/10.95 O que ^^Se a in-ter-face loop-back e
- []
-
-
-Underfull \hbox (badness 2521) in paragraph at lines 259--261
-\OT1/cmr/m/n/10.95 FF:FF:FF:FF:FF:FF) com o en-dere^^Xco IP do
- []
-
-[4]
-Underfull \hbox (badness 1377) in paragraph at lines 315--316
-[]\OT1/cmr/m/n/10.95 No fi-nal desta ex-peri^encia, ^^Se es-per-ado que
- []
-
-
-Underfull \hbox (badness 1968) in paragraph at lines 348--348
-[]\OT1/cmr/bx/n/10.95 Que ro-tas ex-is-tem nos com-puta-
- []
-
-[5]
-Underfull \hbox (badness 3375) in paragraph at lines 370--371
-[]\OT1/cmr/m/n/10.95 Nesta ex-peri^encia foi-nos pe-dido que con-
- []
-
-
-Underfull \vbox (badness 1527) has occurred while \output is active []
-
-
-Underfull \vbox (badness 1057) has occurred while \output is active []
-
- [6]
-Underfull \vbox (badness 1354) has occurred while \output is active []
-
-
-Underfull \hbox (badness 5359) in paragraph at lines 486--487
+[3] [4] [5] [6] [7]
+Underfull \hbox (badness 5359) in paragraph at lines 473--474
 []\OT1/cmr/m/n/10.95 - O cliente
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 500--500
+
+Underfull \hbox (badness 10000) in paragraph at lines 487--487
 \OT1/cmr/bx/n/10.95 aparec-i-mento de uma se-gunda
  []
 
@@ -512,28 +429,137 @@ Underfull \hbox (badness 10000) in paragraph at lines 500--500
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-)
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 520.
- [8] [9
-
-] (./report.aux)
+) [8] [9] [10] [11] [12] [13] [14] [15]
+<images/part2-exp1.png, id=986, 1670.24pt x 673.51625pt>
+File: images/part2-exp1.png Graphic file (type png)
+<use images/part2-exp1.png>
+Package pdftex.def Info: images/part2-exp1.png  used on input line 1021.
+(pdftex.def)             Requested size: 391.28378pt x 157.78304pt.
+<images/exp2-ping3-2.png, id=988, 697.8572pt x 151.3153pt>
+File: images/exp2-ping3-2.png Graphic file (type png)
+<use images/exp2-ping3-2.png>
+Package pdftex.def Info: images/exp2-ping3-2.png  used on input line 1029.
+(pdftex.def)             Requested size: 391.28378pt x 84.8422pt.
+ [16 <./images/part2-exp1.png>]
+<images/exp2-ping3-2-broadcast.png, id=1036, 676.77844pt x 215.30438pt>
+File: images/exp2-ping3-2-broadcast.png Graphic file (type png)
+<use images/exp2-ping3-2-broadcast.png>
+Package pdftex.def Info: images/exp2-ping3-2-broadcast.png  used on input line 1035.
+(pdftex.def)             Requested size: 391.28378pt x 124.48239pt.
+<images/exp2-ping3-3-broadcast.png, id=1037, 657.95813pt x 215.30438pt>
+File: images/exp2-ping3-3-broadcast.png Graphic file (type png)
+<use images/exp2-ping3-3-broadcast.png>
+Package pdftex.def Info: images/exp2-ping3-3-broadcast.png  used on input line 1041.
+(pdftex.def)             Requested size: 391.28378pt x 128.04362pt.
+<images/exp2-ping3-4-broadcast.png, id=1038, 861.2175pt x 275.52937pt>
+File: images/exp2-ping3-4-broadcast.png Graphic file (type png)
+<use images/exp2-ping3-4-broadcast.png>
+Package pdftex.def Info: images/exp2-ping3-4-broadcast.png  used on input line 1047.
+(pdftex.def)             Requested size: 391.28378pt x 125.18527pt.
+<images/exp2-ping2-3-broadcast.png, id=1039, 1077.27469pt x 302.63063pt>
+File: images/exp2-ping2-3-broadcast.png Graphic file (type png)
+<use images/exp2-ping2-3-broadcast.png>
+Package pdftex.def Info: images/exp2-ping2-3-broadcast.png  used on input line 1053.
+(pdftex.def)             Requested size: 391.28378pt x 109.92128pt.
+ [17 <./images/exp2-ping3-2.png> <./images/exp2-ping3-2-broadcast.png> <./images/exp2-ping3-3-broadcast.png> <./images/exp2-ping3-4-broadcast.png>]
+<images/exp2-ping2-4-broadcast.png, id=1052, 1020.81375pt x 186.6975pt>
+File: images/exp2-ping2-4-broadcast.png Graphic file (type png)
+<use images/exp2-ping2-4-broadcast.png>
+Package pdftex.def Info: images/exp2-ping2-4-broadcast.png  used on input line 1059.
+(pdftex.def)             Requested size: 391.28378pt x 71.56396pt.
+<images/exp2-ping2-2-broadcast.png, id=1053, 867.24pt x 215.30438pt>
+File: images/exp2-ping2-2-broadcast.png Graphic file (type png)
+<use images/exp2-ping2-2-broadcast.png>
+Package pdftex.def Info: images/exp2-ping2-2-broadcast.png  used on input line 1065.
+(pdftex.def)             Requested size: 391.28378pt x 97.14232pt.
+<images/experiencia3-captura_4-eth0.png, id=1054, 1027.84pt x 770.88pt>
+File: images/experiencia3-captura_4-eth0.png Graphic file (type png)
+<use images/experiencia3-captura_4-eth0.png>
+Package pdftex.def Info: images/experiencia3-captura_4-eth0.png  used on input line 1073.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [18 <./images/exp2-ping2-3-broadcast.png> <./images/exp2-ping2-4-broadcast.png> <./images/exp2-ping2-2-broadcast.png>]
+<images/experiencia3-captura_4-eth1.png, id=1066, 1027.84pt x 770.88pt>
+File: images/experiencia3-captura_4-eth1.png Graphic file (type png)
+<use images/experiencia3-captura_4-eth1.png>
+Package pdftex.def Info: images/experiencia3-captura_4-eth1.png  used on input line 1079.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia4-ping2-3-redirect.png, id=1067, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping2-3-redirect.png Graphic file (type png)
+<use images/experiencia4-ping2-3-redirect.png>
+Package pdftex.def Info: images/experiencia4-ping2-3-redirect.png  used on input line 1087.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [19 <./images/experiencia3-captura_4-eth0.png> <./images/experiencia3-captura_4-eth1.png>]
+<images/experiencia4-ping2-3-w_redirect.png, id=1074, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping2-3-w_redirect.png Graphic file (type png)
+<use images/experiencia4-ping2-3-w_redirect.png>
+Package pdftex.def Info: images/experiencia4-ping2-3-w_redirect.png  used on input line 1093.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia4-ping3-2.png, id=1075, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping3-2.png Graphic file (type png)
+<use images/experiencia4-ping3-2.png>
+Package pdftex.def Info: images/experiencia4-ping3-2.png  used on input line 1099.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [20 <./images/experiencia4-ping2-3-redirect.png> <./images/experiencia4-ping2-3-w_redirect.png>]
+<images/experiencia4-ping3-4.png, id=1082, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping3-4.png Graphic file (type png)
+<use images/experiencia4-ping3-4.png>
+Package pdftex.def Info: images/experiencia4-ping3-4.png  used on input line 1105.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia4-ping3-Rc.png, id=1083, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping3-Rc.png Graphic file (type png)
+<use images/experiencia4-ping3-Rc.png>
+Package pdftex.def Info: images/experiencia4-ping3-Rc.png  used on input line 1111.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [21 <./images/experiencia4-ping3-2.png> <./images/experiencia4-ping3-4.png>]
+<images/experiencia4-ping3-Router.png, id=1090, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping3-Router.png Graphic file (type png)
+<use images/experiencia4-ping3-Router.png>
+Package pdftex.def Info: images/experiencia4-ping3-Router.png  used on input line 1117.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia4-ping3-Router2.png, id=1091, 1027.84pt x 770.88pt>
+File: images/experiencia4-ping3-Router2.png Graphic file (type png)
+<use images/experiencia4-ping3-Router2.png>
+Package pdftex.def Info: images/experiencia4-ping3-Router2.png  used on input line 1123.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [22 <./images/experiencia4-ping3-Rc.png> <./images/experiencia4-ping3-Router.png>]
+<images/experiencia4-traceroutes.png, id=1098, 1027.84pt x 770.88pt>
+File: images/experiencia4-traceroutes.png Graphic file (type png)
+<use images/experiencia4-traceroutes.png>
+Package pdftex.def Info: images/experiencia4-traceroutes.png  used on input line 1129.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia5.png, id=1099, 1027.84pt x 770.88pt>
+File: images/experiencia5.png Graphic file (type png)
+<use images/experiencia5.png>
+Package pdftex.def Info: images/experiencia5.png  used on input line 1137.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [23 <./images/experiencia4-ping3-Router2.png> <./images/experiencia4-traceroutes.png>]
+<images/experiencia6.png, id=1106, 1027.84pt x 770.88pt>
+File: images/experiencia6.png Graphic file (type png)
+<use images/experiencia6.png>
+Package pdftex.def Info: images/experiencia6.png  used on input line 1145.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+<images/experiencia6-cont.png, id=1107, 1027.84pt x 770.88pt>
+File: images/experiencia6-cont.png Graphic file (type png)
+<use images/experiencia6-cont.png>
+Package pdftex.def Info: images/experiencia6-cont.png  used on input line 1150.
+(pdftex.def)             Requested size: 391.28378pt x 293.46677pt.
+ [24 <./images/experiencia5.png> <./images/experiencia6.png>] [25 <./images/experiencia6-cont.png>] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 9DEE2370A97D5D97B785CE84AA357D9F;15222.
+(rerunfilecheck)             Checksum: 354F70412C2687153AA1AC567069A991;16986.
  ) 
 Here is how much of TeX's memory you used:
- 11406 strings out of 477985
- 173947 string characters out of 5840057
- 1999388 words of memory out of 5000000
- 31292 multiletter control sequences out of 15000+600000
- 518125 words of font info for 52 fonts, out of 8000000 for 9000
+ 12441 strings out of 477985
+ 192588 string characters out of 5840057
+ 2149388 words of memory out of 5000000
+ 31793 multiletter control sequences out of 15000+600000
+ 517957 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,8n,76p,952b,1986s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
-Output written on report.pdf (10 pages, 168600 bytes).
+ 75i,8n,76p,952b,2001s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
+Output written on report.pdf (26 pages, 3245888 bytes).
 PDF statistics:
- 592 PDF objects out of 1000 (max. 8388607)
- 556 compressed objects within 6 object streams
- 183 named destinations out of 1000 (max. 500000)
- 438 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1298 PDF objects out of 1440 (max. 8388607)
+ 1212 compressed objects within 13 object streams
+ 693 named destinations out of 1000 (max. 500000)
+ 663 words of extra memory for PDF output out of 10000 (max. 10000000)
 
