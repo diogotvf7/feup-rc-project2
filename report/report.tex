@@ -198,11 +198,11 @@ O objetivo deste conjunto de experiências é configurar uma rede de computadore
 
 \subsubsection{Arquitetura da rede}
     
-No fim desta experiência, a configuração da rede deverá consistir de 2 computadores(TUX63 e TUX64) conectados pelo Switch.
+No fim desta experiência, a configuração da rede deverá consistir em 2 computadores (TUX63 e TUX64) conectados pelo Switch.
 
 \subsubsection{Objetivo}
 
-O propósito desta experiência foi mostrar como fazer duas máquinas comunicar entre si através de uma rede.
+O propósito desta experiência foi a configuração de dois computadores na mesma rede de modo a permiti-los comunicar.
 
 \subsubsection{Quais são os comandos necessários para esta experiência?}
 
@@ -216,47 +216,45 @@ O propósito desta experiência foi mostrar como fazer duas máquinas comunicar 
     ifconfig eth0 172.16.60.254/24
 \end{bash-darktheme}
  
-Os computadores estavam connectados ao Switch, usando a bridge default deste para comunicarem entre si. 
-
-Para testar a comunicação entre as duas máquinas, usamos o comando \hl{ping} no \hl{TUX63}: 
+Estando conectados ao mesmo \hl{Switch}, os computadores comunicam entre sí usando a bridge default. Podemos testar a comunicação entre os dois computadores usando o comando \hl{ping} passando o endereço IP do outro computador como argumento: 
 
 \begin{bash-darktheme}
-    ping 172.16.60.254
+    ping 172.16.60.254 # No TUX63
 \end{bash-darktheme}
 
-\subsubsection{Quais são os pacotes ARP e para que são usados?}
+\subsubsection{O que são pacotes ARP e para que são usados?}
 
-ARP significa \hl{Address Resolution Protocol} e é um protocolo usado para encontrar o endereço MAC de um vizinho de rede para um determinado endereço IPv4. Este comando é usado para manipular ou exibir a cache de vizinhos de rede IPv4 do kernel.
+ARP (\hl{Address Resolution Protocol}) é um protocolo que traduz endereços IPv4 em endereços MAC numa LAN (Local Area Network). Esta tradução é importante porque apesar de os IPs serem usados para identificar os computadores numa rede, podem mudar ao longo do tempo e devido ao ambiente. Já os MACs são usados para identificar o hardware de um computador e são únicos e imutáveis. \\
+Numa situação em que um \hl[2]{computador 1} quer enviar uma mensagem para um \hl[2]{computador 2}, este começa por verificar se o endereço IP do computador 2 está na sua cache de vizinhos de rede. Caso contrário, o \hl[2]{computador 1} terá de fazer uma tradução do endereço IP do \hl[2]{computador 2} para o seu endereço MAC. Para fazer esta tradução, o ARP fará um broadcast - envia para todos os computadores da rede - de um pedido ARP que apenas será respondido pelo \hl[2]{computador 2}. O \hl[2]{computador 2} responde ao pedido ARP com o seu endereço MAC e o \hl[2]{computador 1} guarda-o na sua cache de vizinhos de rede. \\
+O comando de \hl[2]{UNIX}: \hl{arp}; é usado para manipular ou exibir a cache de vizinhos de rede IPv4 do kernel.
 
 \subsubsection{O que são os os endereços MAC e IP dos pacotes ARP e porquê?}
 
-\hl{ARP} é um protocolo que associa endereços \hl{IP} a endereços \hl{MAC} na tabela ARP para permitir a utilização destes em uso futuro.
-O MAC \hl{Media Access Control} é um endereço físico que identifica um dispositivo numa rede. É usado na data link layer para assegurar o endereço físico do computador - isto significa que está relacionado com o hardware. Os endereços MAC são únicos e não podem ser alterados. É composto por 6 bytes (48 bits) e é representado em hexadecimal.
+O MAC \hl{Media Access Control} é um endereço físico que identifica um dispositivo numa rede. É usado na data link layer para assegurar o endereço físico do computador - isto significa que está relacionado com o hardware. Os endereços MAC são únicos e não podem ser alterados. É composto por 6 bytes (48 bits) e é representado em hexadecimal.\\
 O IP \hl{Internet Protocol} é um endereço lógico que identifica uma conexão entre um computador e uma rede. Pode mudar ao longo do tempo e devido ao ambiente. É usado na network layer para assegurar o endereço lógico do computador - isto significa que está relacionado com o software. Os endereços IP podem ser facilmente encontrados por terceiros, pois são transmitidos pela internet. É composto por 4 bytes (32 bits) e é representado em decimal.
 
 
 \subsubsection{Que pacotes é que o comando ping gera?}
 
-O comando \hl{ping} gera pacotes \hl{ARP} e pacotes \hl{ICMP}. ICMP \hl{Internet Control Message Protocol} é um protocolo da camada de rede que reporta erros e fornece outras informações relevantes para o processamento de pacotes IP. ICMP é usado pelo comando ping para testar uma conexão de rede IP.
+O comando \hl{ping} gera pacotes \hl{ARP} e pacotes \hl{ICMP}. ICMP (\hl{Internet Control Message Protocol}) é um protocolo da camada de rede que reporta erros e fornece outras informações relevantes para o processamento de pacotes IP. Neste contexto, o ICMP é usado pelo comando ping para testar uma conexão de rede IP.
 
 \subsubsection{Quais são os MAC e IP dos pacotes ping?}
 
-Encontram-se na secção de análise dos logs desta experiência. 
+Ver o ponto \ref{sec:analise-logs}.
 
 \subsubsection{Como determinar se um pacote é ARP, IP ou ICMP?}
 
-É possível determinar se um frame Ethernet recebido é ARP, IP, ICMP verificando a captura do WireShark, na coluna Portocol. Também é possível verificar o tipo de pacote através do campo Type do cabeçalho Ethernet. O valor 0x0800 indica que o pacote é IP ou ICMP já que este se encontra guardado no pacote do IPv4, o valor 0x0806 indica que o pacote é ARP.
+É possível determinar se um frame Ethernet recebido é \hl{ARP}, \hl{IP}, \hl{ICMP} verificando a captura do \hl[2]{WireShark}, na coluna Portocol. O \hl[2]{WireShark} faz esta distinção através do campo Type do cabeçalho Ethernet. O valor 0x0800 indica que o pacote é IP ou ICMP já que este se encontra guardado no pacote do IPv4, o valor 0x0806 indica que o pacote é ARP. 
 
 \subsubsection{Como determinar o tamanho de um pacote recebido?}
 
-O tamanho de um pacote recebido pode ser determinado através da captura do WireShark, na coluna Length. Além disso, o tamanho dos pacotes IPv4 pode ser determinado a partir de 2 bytes que se encontram no pacote.
-Quanto aos pacotes ARP, estes possuem um tamanho fixo de 28 bytes.
+O tamanho de um pacote recebido pode ser determinado através da captura do WireShark, na coluna Length. Além disso, o tamanho dos pacotes IPv4 pode ser determinado a partir de 2 bytes que se encontram no pacote. Quanto aos pacotes ARP, estes possuem um tamanho fixo de 28 bytes.
 
 \subsubsection{O que é a interface loopback e porque é que é importante?}
 
-A interface loopback é uma interface de rede virtual que permite que um computador se comunique consigo mesmo. É importante pois permite testar a pilha de protocolos TCP/IP sem a necessidade de uma rede física.
+A interface \hl{loopback} é uma interface de rede virtual que permite que um computador comunique consigo mesmo. É importante pois permite testar a stack de protocolos \hl[2]{TCP/IP} sem a necessidade de uma rede física. Essencialmente, a interface loopback, muitas vezes identificada pelo endereço \hl[2]{IP 127.0.0.1}, cria um ambiente isolado no próprio dispositivo, onde os dados enviados são retornados para a sí.
 
-\subsubsection{Análise dos logs}
+\subsubsection{Análise dos logs}\label{sec:analise-logs}
 
 Inicialmente, o TUX63 não sabe o endereço MAC do TUX64 e vice-versa. Assim, o TUX63 envia um pacote ARP para o \hl{broadcast} (MAC FF:FF:FF:FF:FF:FF) com o endereço IP do TUX64. O TUX64 recebe o pacote ARP vindo do \hl{broadcast}, que contém o IP do TUX63, e responde ao TUX63 de modo a indicar que guardou o seu endereço IP no pedido ARP, enviando o seu endereço MAC. O TUX63 ao receber este pacote, guarda o endereço MAC do TUX64 na sua tabela ARP. Permitindo assim obter um PING request e PING response.
 Os endereços IP e Mac obtidos são os seguintes:
@@ -275,11 +273,11 @@ Os endereços IP e Mac obtidos são os seguintes:
 
 \subsubsection{Arquitetura da rede}
 
-No final da experiência, a configuração da red deverá consistir de 2 computadores (TUX63 e TUX64) e um computador (TUX62) conectados às bridges (bridge0) e (bridge1) pelo Switch, respetivamente. 
+No final da experiência, a configuração da rede deverá consistir em 2 computadores (\hl[2]{TUX63 e TUX64}) conectados à bridge (\hl[2]{bridge0}) e um computador (\hl[2]{TUX62}) conectado à bridge (\hl[2]{bridge1}). 
 
 \subsubsection{Objetivo}
 
-Esta experiência teve como objetivo ensinar-nos a configurar 2 domínios de rede diferentes no mesmo switch e verificar que por padrão não ocorre comunicação entre estes domínios.
+Esta experiência teve como objetivo ensinar-nos a configurar 2 domínios de rede diferentes no mesmo switch e verificar que por defeito não ocorre comunicação entre estes domínios, sendo necessária a sua configuração.
 
 \subsubsection{Quais são os comandos necessários para esta experiência?}
 
@@ -314,11 +312,11 @@ Além disso, é possível concluir que passaram a existir 2 sub-redes, uma para 
 
 \subsubsection{Arquitetura da rede}
 
-No final desta experiência, é esperado obtermos uma arquitetura semelhante à da experiência anterior, com a adição da conexão do TUX64 a ambas as bridges.
+No final desta experiência, é esperado que tenhamos uma arquitetura semelhante à da experiência anterior, com uma nova da conexão TUX64 à bridge (\hl{bridge61}) que mediará a comunicação entre as duas bridges.
 
 \subsubsection{Objetivo}
 
-O objetivo desta experiência foi ensinar-nos a transformar o TUX64 num router e a configurar o mesmo para que este possa comunicar com os restantes computadores.
+O objetivo desta experiência foi ensinar-nos a transformar o TUX64 num router e a configurar o mesmo para que este possa comunicar com os restantes computadores e permitir que estes comuniquem entre sí.
 
 \subsubsection{Quais são os comandos necessários para esta experiência?}
 
@@ -345,7 +343,7 @@ O objetivo desta experiência foi ensinar-nos a transformar o TUX64 num router e
 
 \end{bash-darktheme}
 
-Nota: Devido a não conseguirmos obter os logs na nossa mesa, foi necessário utilizar outros ips, mas o procedimento é o mesmo.
+Nota: Devido a não conseguirmos obter os logs na nossa bancada, foi necessário utilizar outros ips, mas o procedimento é o mesmo.
 
 \subsubsection{Que rotas existem nos computadores? Qual o seu significado?}
     
@@ -357,9 +355,6 @@ Uma entrada da tabela de encaminhamento contém o endereço de destino/origem, o
 
 \subsubsection{ Que mensagens ARP, e os endereços MAC, são observadas e porquê? / Análise dos logs} 
 
-The exchanged ARP messages contain only the MAC addresses of Tux63 and Tux64 and not the final destination(Tux62).
-This occurs because of the existence of the route. 
-Tux63 does not know the address of Tux62, it only knows the address of the gateaway (Tux64) that leads to Tux62.
 
 No caso do ping do TUX63 para o TUX62. As mensagens ARP trocadas contêm apenas os endereços MAC do TUX63 e do TUX64 e não do destino final (TUX62). Isto ocorre devido à existência da rota. O TUX63 não conhece o endereço do TUX62, apenas conhece o endereço do gateway (TUX64) que leva ao TUX62.
 
@@ -368,14 +363,41 @@ De seguida, o ping passa pelo TUX64 e alcança o TUX62, sendo realizado o mesmo 
 
 É importante notar que o TUX63 não tem informação sobre o endereço MAC do TUX62 e vice-versa. Cada um destes computadores apenas conhece o endereço MAC do seu gateway, que é o TUX64.
 
+\subsection{Experiência 4}
 
-% ...
+\subsubsection{Configuração de um Router Comercial e Implementação de NAT}
 
+Nesta experiência foi-nos pedido que configurássemos um router comercial na nossa bridge (\hl{bridge61}).
 
-\subsection{Exp 4 - Configuração de um Router Comercial e Implementação de NAT}
+\subsubsection{Quais são os comandos necessários para esta experiência?}
 
+\begin{bash-darktheme}
+    # Router Serial Console
+    /interface bridge port remove [find interface=ether5]
+    /interface bridge port add bridge=bridge61 interface=ether5
+    /ip address add address=172.16.2.69/24 interface=ether1
+    /ip address add address=172.16.61.254/24 interface=ether2
+    /ip route add dst-address=172.16.60.0/24 gateway=172.16.61.253
+    /ip route add dst-address=0.0.0.0/0 gateway=172.16.2.254 
 
+    # Terminais dos TUXs
+    route add default gw 172.16.61.254 # No tux62
+    route add default gw 172.16.60.254 # No tux63
+    route add default gw 172.16.61.254 # No tux64    
+    sysctl net.ipv4.conf.eth0.accept_redirects=0 
+    sysctl net.ipv4.conf.all.accept_redirects=0 
+    route del -net 172.16.60.0 gw 172.16.61.253 netmask 255.255.255.0
+    traceroute -n
+    route add -net 172.16.60.0/24 gw 172.16.61.253
+    sysctl net.ipv4.conf.eth0.accept_redirects=0 
+    sysctl net.ipv4.conf.all.accept_redirects=0 
+    /ip firewall nat disable 0
+    /ip firewall nat enable 0
+\end{bash-darktheme}
 
+\subsubsection{Como configurar uma rota estática num router comercial?}
+
+Para configurarmos uma rota estática no router comercial começamos por ligar o router ao \hl{TUX63} através de um cabo de série. De seguida, acedemos à consola de comandos do router através do \hl{GTKTerm} de modo a podermos configuar o router. Adicioná-mo-lo à bridge pretendida (\hl[2]{bridge61}) e atribuimos-lhe um IP na LAN. Temos também de lhe atribuir um IP para a rede exterior. Definimos também as rotas necessárias para chegar às redes da bridge (\hl[2]{bridge60}) e para chegar à internet, indicando os \hl{gateways} necessários.
 
 \subsection{Experiência 5}
 

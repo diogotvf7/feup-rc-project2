@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1703288494 "/home/diogotvf7/Documents/rc/feup-rc-project2/report/report.tex" "report.pdf" "report" 1703288495 0
-  "/home/diogotvf7/Documents/rc/feup-rc-project2/report/report.tex" 1703288493 9969 c06814256d3c51c1d709aaef8ad0d77e ""
+["pdflatex"] 1703359509 "/home/diogotvf7/Documents/rc/feup-rc-project2/report/report.tex" "report.pdf" "report" 1703359509 0
+  "/home/diogotvf7/Documents/rc/feup-rc-project2/report/report.tex" 1703359509 24334 c291d3d1adc05aa5ed179cc089fa7528 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1689853683 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1689853683 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcbx1200.tfm" 1689853683 1536 c09172c8f235393e6235bb4758357c41 ""
@@ -83,10 +83,10 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1703262929 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1703262904 6768051 f0324f8bd665f894260d4acafc89dc5e ""
   "images/uporto-feup.pdf" 1703274864 12740 0bd34fcc2c83189d41299a9453e17a77 ""
-  "report.aux" 1703288494 1600 fa2bfd8838d30022a43b1cfde2e4b6fc "pdflatex"
-  "report.out" 1703288494 1600 0fcd3bfdc80458b32e6cb30d1813b9ee "pdflatex"
-  "report.tex" 1703288493 9969 c06814256d3c51c1d709aaef8ad0d77e ""
-  "report.toc" 1703288494 718 063c28c681a8cbb46b20d05e42984e40 "pdflatex"
+  "report.aux" 1703359509 6799 933468cc2a49728f008a03a6a96b5031 "pdflatex"
+  "report.out" 1703359509 10651 0a1d2ea0d02ff25a1ccef1322d46f6a9 "pdflatex"
+  "report.tex" 1703359509 24334 c291d3d1adc05aa5ed179cc089fa7528 ""
+  "report.toc" 1703359509 4480 c126a374b290564e8702db37848a2e35 "pdflatex"
   (generated)
   "report.aux"
   "report.log"
