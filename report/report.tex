@@ -491,23 +491,19 @@ As fases de uma conexão TCP são as seguintes:
 \subsubsection{Como funciona o mecanismo ARQ TCP? Quais são os campos de TCP relevantes?}
 
 O mecanismo ARQ (\hl{Automatic Repeat reQuest}) TCP é um mecanismo que permite que o protocolo TCP recupere pacotes perdidos. Este protocolo assegura que os pacotes são entregues ao destino sem erros e na ordem correta. Este mecanismo opera através de ACKs (\hl[2]{Acknowledgement}) e timeouts. Quando um pacote é enviado, o emissor espera por um ACK. Se o ACK não chegar dentro de um determinado período de tempo, o emissor reenvia o pacote.
-Os campos de TCP que refletem este protocolo são os campos "Sequence Number" e "
+O campo de TCP que reflete este protocolo é o campo "Sequence Number" que indica o número de sequência do pacote. Este campo é usado para ordenar os pacotes e para verificar se algum pacote foi perdido. 
 
 \subsubsection{Como é que o mecanismo de controlo de congestão do TCP funciona? Como é que a taxa de transferência de dados evolui com o passar do tempo?}
 
 O protocolo de controlo de congestão do TCP visa otimizar o desempenho da transferência de dados ao mesmo tempo que procura evitar a congestão da rede. A taxa de transferência de dados começa lenta e aumenta exponencialmente até que ocorra uma perda de pacotes. Quando uma perda de pacotes ocorre, a taxa de transferência de dados diminui e aumenta gradualmente até que ocorra uma nova perda de pacotes.
 
-\subsubsection{A taxa de transferência de conexões de dados TCP é perturbada pelo aparecimento de uma segunda conexão TCP? Como?}
+\subsubsection{A taxa de transferência em ligações de dados TCP é perturbada pelo aparecimento de uma segunda ligação TCP? Como?}
 
-
-
-
+A taxa de transferência numa ligação de dados TCP é perturbada pelo aparecimento de uma segunda ligação uma vez que o protocolo TCP divide a sua largura de banda igualmente entre as ligações. 
 
 \section{Conclusão}
 
 Com a realização completa e correta das experiências, como também da aplicação de download. Foi possível aprender mais sobre o funcionamento e configuração de uma rede como também e sobre os protocolos envolvidos na transferência dos dados, tanto ao longo da propagação pela network layer como na link layer.
-
-
 
 \section{Anexos}
 
