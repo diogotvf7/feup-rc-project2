@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  23 DEC 2023 22:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.12.22)  23 DEC 2023 22:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -518,59 +518,27 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
-LaTeX Font Info:    Trying to load font information for OML+Consolas on input line 518.
-LaTeX Font Info:    No file OMLConsolas.fd. on input line 518.
-
-
-LaTeX Font Warning: Font shape `OML/Consolas/m/n' undefined
-(Font)              using `OML/cmm/m/it' instead
-(Font)              for symbol `textless' on input line 518.
-
-LaTeX Font Info:    Trying to load font information for OT1+Consolas on input line 524.
-LaTeX Font Info:    No file OT1Consolas.fd. on input line 524.
-
-LaTeX Font Warning: Font shape `OT1/Consolas/b/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 524.
-
-LaTeX Font Info:    Trying to load font information for TS1+Consolas on input line 524.
-LaTeX Font Info:    No file TS1Consolas.fd. on input line 524.
-
-LaTeX Font Warning: Font shape `TS1/Consolas/m/n' undefined
-(Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 524.
-
-LaTeX Font Info:    Trying to load font information for OMS+Consolas on input line 527.
-LaTeX Font Info:    No file OMSConsolas.fd. on input line 527.
-
-LaTeX Font Warning: Font shape `OMS/Consolas/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 527.
-
-LaTeX Info: Symbol \textminus not provided by
-            font family Consolas in TS1 encoding.
-            Default family used instead on input line 527.
-[8] [9
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 524.
+ [8] [9
 
 ] (./report.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 3469DCC97136B8A232CB8F30128F050A;15216.
  ) 
 Here is how much of TeX's memory you used:
- 11464 strings out of 477985
- 174820 string characters out of 5840057
+ 11406 strings out of 477985
+ 173947 string characters out of 5840057
  1999388 words of memory out of 5000000
- 31338 multiletter control sequences out of 15000+600000
- 519075 words of font info for 55 fonts, out of 8000000 for 9000
+ 31292 multiletter control sequences out of 15000+600000
+ 518125 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,8n,76p,952b,1986s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-Output written on report.pdf (10 pages, 202924 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
+Output written on report.pdf (10 pages, 168340 bytes).
 PDF statistics:
- 613 PDF objects out of 1000 (max. 8388607)
- 569 compressed objects within 6 object streams
- 184 named destinations out of 1000 (max. 500000)
+ 592 PDF objects out of 1000 (max. 8388607)
+ 556 compressed objects within 6 object streams
+ 183 named destinations out of 1000 (max. 500000)
  438 words of extra memory for PDF output out of 10000 (max. 10000000)
 
