@@ -379,6 +379,8 @@ Nesta experiência foi-nos pedido que configurássemos um router comercial na no
     /ip address add address=172.16.61.254/24 interface=ether2
     /ip route add dst-address=172.16.60.0/24 gateway=172.16.61.253
     /ip route add dst-address=0.0.0.0/0 gateway=172.16.2.254 
+    /ip firewall nat disable 0
+    /ip firewall nat enable 0
 
     # Terminais dos TUXs
     route add default gw 172.16.61.254 # No tux62
@@ -391,13 +393,35 @@ Nesta experiência foi-nos pedido que configurássemos um router comercial na no
     route add -net 172.16.60.0/24 gw 172.16.61.253
     sysctl net.ipv4.conf.eth0.accept_redirects=0 
     sysctl net.ipv4.conf.all.accept_redirects=0 
-    /ip firewall nat disable 0
-    /ip firewall nat enable 0
+
 \end{bash-darktheme}
 
 \subsubsection{Como configurar uma rota estática num router comercial?}
 
 Para configurarmos uma rota estática no router comercial começamos por ligar o router ao \hl{TUX63} através de um cabo de série. De seguida, acedemos à consola de comandos do router através do \hl{GTKTerm} de modo a podermos configuar o router. Adicioná-mo-lo à bridge pretendida (\hl[2]{bridge61}) e atribuimos-lhe um IP na LAN. Temos também de lhe atribuir um IP para a rede exterior. Definimos também as rotas necessárias para chegar às redes da bridge (\hl[2]{bridge60}) e para chegar à internet, indicando os \hl{gateways} necessários.
+
+\subsubsection{Quais são os caminhos seguidos pelos pacotes nas experiências, porquê?}\label{sec:exp4-caminhos}
+
+Com os redirects desativados, os pacotes seguem o caminho TUX62 $\rightarrow$ TUX64 $\rightarrow$ TUX63. Isto acontece porque o TUX62 não sabe que o TUX64 é um router e, portanto, envia os pacotes para o TUX64. O TUX64, por sua vez, envia os pacotes para o TUX63, que é o destino final. \\
+Com os redirects ativados, os pacotes seguem o caminho TUX62 $\rightarrow$ TUX63. Isto acontece porque o TUX62 sabe que o TUX64 é um router e, portanto, envia os pacotes diretamente para o TUX63.
+
+\subsubsection{Como configurar o NAT num router comercial?}
+
+Para configurar o NAT num router comercial, temos de aceder à consola de comandos do router através do \hl{GTKTerm} e executar os seguintes comandos:
+\begin{bash-darktheme}
+    /ip firewall nat disable 0
+    /ip firewall nat enable 0
+\end{bash-darktheme}
+
+\subsubsection{O que faz o NAT?}
+
+O NAT (\hl{Network Address Translation}) é um processo que permite que vários computadores partilhem um único endereço IP que é usado na comunicação com o exterior. O NAT é usado para traduzir endereços IP de uma \hl[2]{LAN} (i.e. privados) para endereços IP públicos.  
+Este processo é muito importante uma vez que o número de endereços IPv4 públicos é limitado e, portanto, não é possível atribuir um endereço IPv4 público a cada dispositivo que se liga à internet.
+
+\subsubsection{Análise dos logs}
+
+Desenvolvendo o tópico abordado em \ref{sec:exp4-caminhos}, ao enivarmos um \hl{ping} do \hl[2]{TUX62} para o \hl[2]{TUX63} enquanto temos os redirects desativados, e após ter sido apagada a rota do \hl{TUX62} para a rede \hl{172.16.60.0/24} através do \hl{TUX64}, verificamos que o \hl{TUX62} envia o \hl{ping} para o \hl[2]{router} pela default route que definimos até conseguir chegar ao \hl{TUX63}.
+Já quando ativamos os redirects, o \hl{TUX62} envia o \hl{ping} para o \hl{TUX64} e este reencaminha-o para o \hl{TUX63}. Isto acontece pois a ligação mais direta da rede passou a ser através do \hl{TUX64} e não o router. O \hl{TUX63} responde ao \hl{TUX64} e este reencaminha a resposta para o \hl{TUX62}. 
 
 \subsection{Experiência 5}
 
@@ -441,5 +465,113 @@ Os pacotes DNS  trocados são o DNS query e o DNS response. O DNS query contém 
 Nesta experiência, a partir do TUX62, damos ping ao google.com. Como google.com não é um IP, é necessário utilizar o \hl{DNS}. 
 Inicialmente, o DNS procura os nameservers que estão definidos no ficheiro \hl{/etc/resolv.conf}. De seguida, o DNS envia um pacote \hl{DNS query} para o nameserver. O nameserver responde com um pacote \hl{DNS response} que contém o endereço IP do google.com, permitindo com que o ping seja bem sucedido.
 
+\subsection{Experiência 6}
+
+\subsubsection{Objective} 
+
+Nesta experiência devemos testar a aplicação que desenvolvemos na primeira parte do trabalho prático dentro da rede que configuramos nas experiências anteriores.
+
+\subsubsection{Quantas conexões TCP são abertas pela aplicação FTP?}
+
+A aplicação FTP abre duas conexões TCP. Uma para o controlo da aplicação e outra para a transferência de dados.
+
+\subsubsection{Em que conexão é transportada a informação de controlo do FTP?}
+
+A informação de controlo do FTP é transportada na primeira conexão TCP que é aberta pela aplicação.
+
+\subsubsection{Quais são as fases de uma conexão TCP?}
+
+As fases de uma conexão TCP são as seguintes:
+\begin{description}
+    \item[1. Estabelecimento de conexão] - O cliente envia um pacote \hl{SYN} para o servidor para iniciar uma conexão TCP. O servidor responde com um pacote \hl{SYN-ACK} para o cliente. O cliente responde com um pacote \hl{ACK} para o servidor.
+    \item[2. Transferência de dados] - O cliente e o servidor trocam dados.
+    \item[3. Encerramento da ligação] - O cliente envia um pacote \hl{FIN} para o servidor para terminar a conexão TCP. O servidor responde com um pacote \hl{ACK} para o cliente. Opcionalmente, o servidor também pode enviar um pacote \hl{FIN} para o cliente para terminar a conexão TCP ao qual o cliente responderá com um pacote \hl{ACK} para o servidor. 
+\end{description}
+
+\subsubsection{Como funciona o mecanismo ARQ TCP? Quais são os campos de TCP relevantes?}
+
+O mecanismo ARQ (\hl{Automatic Repeat reQuest}) TCP é um mecanismo que permite que o protocolo TCP recupere pacotes perdidos. Este protocolo assegura que os pacotes são entregues ao destino sem erros e na ordem correta. Este mecanismo opera através de ACKs (\hl[2]{Acknowledgement}) e timeouts. Quando um pacote é enviado, o emissor espera por um ACK. Se o ACK não chegar dentro de um determinado período de tempo, o emissor reenvia o pacote.
+Os campos de TCP que refletem este protocolo são os campos "Sequence Number" e "
+
+\subsubsection{Como é que o mecanismo de controlo de congestão do TCP funciona? Como é que a taxa de transferência de dados evolui com o passar do tempo?}
+
+O protocolo de controlo de congestão do TCP visa otimizar o desempenho da transferência de dados ao mesmo tempo que procura evitar a congestão da rede. A taxa de transferência de dados começa lenta e aumenta exponencialmente até que ocorra uma perda de pacotes. Quando uma perda de pacotes ocorre, a taxa de transferência de dados diminui e aumenta gradualmente até que ocorra uma nova perda de pacotes.
+
+\subsubsection{A taxa de transferência de conexões de dados TCP é perturbada pelo aparecimento de uma segunda conexão TCP? Como?}
+
+
+
+
+
+\section{Conclusão}
+
+Com a realização completa e correta das experiências, como também da aplicação de download. Foi possível aprender mais sobre o funcionamento e configuração de uma rede como também e sobre os protocolos envolvidos na transferência dos dados, tanto ao longo da propagação pela network layer como na link layer.
+
+
+
+\section{Anexos}
+
+\begin{c-darktheme}
+    #ifndef DOWNLOAD_H
+    #define DOWNLOAD_H
+
+    #include <stdlib.h>
+    #include <stdio.h>
+
+    #include "url.h"
+    #include "server.h"
+
+    int download(const char *arg);
+
+    #endif
+\begin{c-darktheme}
+
+\end{c-darktheme}
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+% ===================
+\begin{c-darktheme}
+
+\end{c-darktheme}
+% ===================
+
+
 \end{document}
+
+
 
