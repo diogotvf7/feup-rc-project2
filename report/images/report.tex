@@ -511,6 +511,10 @@ Com a realização completa e correta das experiências, como também da aplica�
 
 \section{Anexos}
 
+
+\subsection{Código}
+
+\subsubsection{download.h}
 \begin{c-darktheme}
     #ifndef DOWNLOAD_H
     #define DOWNLOAD_H
@@ -526,50 +530,557 @@ Com a realização completa e correta das experiências, como também da aplica�
     #endif
 \end{c-darktheme}
 
+\subsubsection{server.h}
 % ===================
 \begin{c-darktheme}
+    #ifndef UTIL_H
+    #define UTIL_H
+    
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <unistd.h>
+    #include <netdb.h>
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    
+    /**
+     * https://man7.org/linux/man-pages/man3/getaddrinfo.3.html
+     */
+    
+    // Server Status Codes
+    #define SERVER_LOGIN_READY 220
+    #define SERVER_PASSWORD_REQUIRED 331
+    #define SERVER_LOGIN_SUCCESS 230
+    #define SERVER_PASSIVE_READY 227
+    #define FILE_STATUS_OKAY 150
+    #define CLOSING_DATA_CONNECTION 226
+    
+    int get_status(int sfd);
+    
+    int get_connection(const char *hostname, const char *port);
+    
+    void auth(int sfd, const char *username, const char *password);
+    
+    void get_passive(int sfd, char *host, char *port);
+    
+    void request_file(int sfd, const char *filename);
+    
+    void get_file(int psfd, const char *filename);
+    
+    #endif
+\end{c-darktheme}
+% ===================
+
+\subsubsection{url.h}
+% ===================
+\begin{c-darktheme}
+    #ifndef URL_H
+#define URL_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+enum url_read_state
+{
+    PROTOCOL,
+    USER,
+    HOST,
+    PORT,
+    PATH,
+    END,
+};
+
+struct URL
+{
+    char protocol[16];
+    char username[256];
+    char password[256];
+    char hostname[256];
+    char ip[256];
+    char port[16];
+    char path[256];
+};
+
+struct URL parse_url(const char *arg);
+
+void print_url(struct URL url);
+
+const char *get_filename(const char *path);
+
+#endif
+\end{c-darktheme}
+% ===================
+
+\subsubsection{download.c}
+% ===================
+\begin{c-darktheme}
+    #include "download.h"
+
+    int download(const char *arg)
+    {
+        printf("----------------------------------------\n"); // PARSE URL
+        struct URL url = parse_url(arg);
+        print_url(url);
+    
+        printf("----------------------------------------\n"); // CONNECT TO SERVER
+        int sfd = get_connection(url.hostname, url.port);
+        printf("Connected to server (socket fd: %d)\n", sfd);
+    
+        printf("----------------------------------------\n"); // AUTHENTICATE
+        auth(sfd, url.username, url.password);
+        printf("Successfully authenticated as %s\n", url.username);
+    
+        printf("----------------------------------------\n"); // OPEN PASSIVE MODE
+        char psv_hostname[INET6_ADDRSTRLEN], psv_port[6];
+        get_passive(sfd, psv_hostname, psv_port);
+        printf("Passive mode address: %s:%s\n", psv_hostname, psv_port);
+    
+        printf("----------------------------------------\n"); // CONNECT TO PASSIVE
+        int psfd = get_connection(psv_hostname, psv_port);
+        printf("Connected to passive (socket fd: %d)\n", psfd);
+    
+        printf("----------------------------------------\n"); // DOWNLOAD FILE
+        const char *filename = get_filename(url.path);
+        printf("Requesting file %s\n", url.path);
+        request_file(sfd, url.path);
+        printf("Starting download of %s\n", filename);
+        get_file(psfd, filename);
+    
+        printf("----------------------------------------\n"); // CLOSE CONNECTIONS
+        close(sfd);
+        printf("Closed connection to server\n");
+        close(psfd);
+        printf("Closed connection to passive\n");
+    
+        return 0;
+    }
+    
+\end{c-darktheme}
+% ===================
+
+\subsubsection{server.c}
+% ===================
+\begin{c-darktheme}
+    #include "server.h"
+
+// #include <arpa/inet.h>
+// #include <netinet/in.h>
+
+int get_status(int sfd)
+{
+    char buffer[1024];
+    ssize_t total_bytes_read = 0;
+
+    while (1)
+    {
+        usleep(100000);
+        ssize_t bytes_read = recv(sfd, buffer, sizeof buffer - total_bytes_read, MSG_DONTWAIT);
+        if (bytes_read < 0)
+        {
+            buffer[total_bytes_read] = '\0';
+            break;
+        }
+        total_bytes_read += bytes_read;
+    }
+
+    int status;
+    if (sscanf(buffer, "%d", &status) != 1)
+    {
+        fprintf(stderr, "Invalid status line: %s\n", buffer);
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("Full message:\n\"%s\"\n", buffer); // debug2
+    // printf("Status: %d\n\n", status);          // debug2
+
+    return status;
+}
+
+int get_connection(const char *hostname, const char *port)
+{
+    int sfd, s;
+    struct addrinfo hints;
+    struct addrinfo *result, *rp;
+    // char ipstr[INET6_ADDRSTRLEN];
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+
+    s = getaddrinfo(hostname, port, &hints, &result);
+    if (s != 0)
+    {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+        exit(EXIT_FAILURE);
+    }
+
+    for (rp = result; rp != NULL; rp = rp->ai_next)
+    {
+        sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+
+        if (sfd == -1)
+            continue;
+
+        if (connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+            break;
+
+        close(sfd);
+    }
+
+    // struct sockaddr_in *ipv4 = (struct sockaddr_in *)rp->ai_addr;
+    // void *addr = &(ipv4->sin_addr);
+    // inet_ntop(rp->ai_family, addr, ipstr, sizeof ipstr);
+    // printf("Connected to %s:%s (%s)\n", hostname, port, ipstr);
+
+    freeaddrinfo(result);
+
+    if (rp == NULL)
+    {
+        fprintf(stderr, "Could not connect\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return sfd;
+}
+
+void auth(int sfd, const char *username, const char *password)
+{
+    char buf[266];
+    int command_length;
+
+    // printf("1 Step -------------- (check if service ready for new user) | =220\n"); // debug1
+    if (get_status(sfd) != SERVER_LOGIN_READY)
+    {
+        fprintf(stderr, "Service not ready for new user.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("2 Step ------------------------------------- (sending user) | \n"); // debug1
+    command_length = snprintf(buf, 266, "user %s\n", username);
+    if (send(sfd, buf, command_length, 0) < 0)
+    {
+        fprintf(stderr, "Error sending username (%s).\n", username);
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("3 Step ------------------ (check if service needs password) | =331\n"); // debug1
+    if (get_status(sfd) != SERVER_PASSWORD_REQUIRED)
+    {
+        fprintf(stderr, "Error, server should expect password\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("4 Step -------------------------------- (send password) |\n"); // debug1
+    command_length = snprintf(buf, 266, "pass %s\n", password);
+    if (send(sfd, buf, command_length, 0) < 0)
+    {
+        fprintf(stderr, "Error sending password (%s).\n", password);
+        exit(EXIT_FAILURE);
+    }
+
+    // printf("5 Step -------------------- (check if login was successful) | =230\n"); // debug1
+    if (get_status(sfd) != SERVER_LOGIN_SUCCESS)
+    {
+        fprintf(stderr, "Login failed.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void get_passive(int sfd, char *host, char *port)
+{
+    char *in_buf = "pasv\n", out_buf[256];
+
+    if (send(sfd, in_buf, strlen(in_buf), 0) < 0)
+    {
+        fprintf(stderr, "Error sending passive command.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    ssize_t bytes = recv(sfd, out_buf, sizeof out_buf - 1, 0);
+    if (bytes < 0)
+    {
+        perror("recv");
+        exit(EXIT_FAILURE);
+    }
+    out_buf[bytes] = '\0';
+
+    int code;
+    uint8_t h1, h2, h3, h4, p1, p2;
+    sscanf(out_buf, "%d %*[^(](%hhu, %hhu, %hhu, %hhu, %hhu, %hhu)\n", &code, &h1, &h2, &h3, &h4, &p1, &p2);
+    if (code != SERVER_PASSIVE_READY)
+    {
+        fprintf(stderr, "Error entering passive mode.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    sprintf(host, "%hhu.%hhu.%hhu.%hhu", h1, h2, h3, h4);
+    sprintf(port, "%hu", p1 * 256 + p2);
+}
+
+void request_file(int sfd, const char *path)
+{
+    char buf[266];
+    int command_length;
+
+    command_length = snprintf(buf, 266, "retr %s\n", path);
+    if (send(sfd, buf, command_length, 0) < 0)
+    {
+        fprintf(stderr, "Error sending file request (%s).\n", path);
+        exit(EXIT_FAILURE);
+    }
+
+    int status = get_status(sfd);
+    if (status == FILE_STATUS_OKAY || status == CLOSING_DATA_CONNECTION)
+    {
+        printf("File ok.\n");
+        return;
+    }
+    else
+    {
+        fprintf(stderr, "File unavailable.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void get_file(int psfd, const char *filename)
+{
+    char output_path[256];
+    strcpy(output_path, "output/");
+    strcat(output_path, filename);
+
+    FILE *fp = fopen(output_path, "w");
+    if (fp == NULL)
+    {
+        fprintf(stderr, "Error opening file (%s).\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    char buf[256];
+    ssize_t bytes;
+    while ((bytes = recv(psfd, buf, sizeof buf - 1, 0)) > 0)
+    {
+        fwrite(buf, 1, bytes, fp);
+    }
+
+    fclose(fp);
+}
 
 \end{c-darktheme}
 % ===================
 
+
+\subsubsection{url.c}
 % ===================
 \begin{c-darktheme}
+    #include "url.h"
+
+struct URL parse_url(const char *arg)
+{
+    int state = PROTOCOL;
+    struct URL url = {"", "", "", "", "", "", ""};
+
+    while (state != END)
+    {
+        int n = 0;
+        switch (state)
+        {
+        case PROTOCOL:
+            // printf("PROTOCOL: %s\n", arg);
+            if (sscanf(arg, "%15[^:@/]://%n", url.protocol, &n) && n > 0)
+            {
+                state = USER;
+                arg += n;
+            }
+            else
+            {
+                // fprintf(stderr, "error: protocol not found for url: %s\n", arg);
+                exit(EXIT_FAILURE);
+            }
+            break;
+        case USER:
+            // printf("USER: %s\n", arg);
+            if (sscanf(arg, "%255[^:@/]:%255[^:@/]@%n", url.username, url.password, &n) && n > 0)
+            {
+                arg += n;
+            }
+            else if (sscanf(arg, "%255[^:@/]@%n", url.username, &n) && n > 0)
+            {
+                url.password[0] = '\0';
+                arg += n;
+            }
+            else
+            {
+                url.username[0] = '\0';
+                url.password[0] = '\0';
+            }
+            state = HOST;
+            break;
+        case HOST:
+            // printf("HOST: %s\n", arg);
+            if (sscanf(arg, "%255[^:/]:%n", url.hostname, &n) && n > 0)
+            {
+                state = PORT;
+            }
+            else if (sscanf(arg, "%255[^:/]/%n", url.hostname, &n) && n > 0)
+            {
+                state = PATH;
+            }
+            else if (sscanf(arg, "%255[^:/]%n", url.hostname, &n) && n > 0)
+            {
+                state = END;
+            }
+            else
+            {
+                // fprintf(stderr, "error: host not found for url: %s\n", arg);
+                exit(EXIT_FAILURE);
+            }
+            arg += n;
+            break;
+        case PORT:
+            // printf("PORT: %s\n", arg);
+            if (sscanf(arg, "%5[0123456789]/%n", url.port, &n) && n > 0)
+            {
+                state = PATH;
+            }
+            else if (sscanf(arg, "%5[0123456789]%n", url.port, &n) && n > 0)
+            {
+                state = END;
+            }
+            else
+            {
+                // fprintf(stderr, "error: port not found for url: %s\n", arg);
+                exit(EXIT_FAILURE);
+            }
+            arg += n;
+            break;
+        case PATH:
+            // printf("PATH: %s\n", arg);
+            if (sscanf(arg, "%255[^:@]%n", url.path, &n) == -1)
+            {
+                exit(EXIT_FAILURE);
+            }
+            arg += n;
+            state = END;
+            break;
+        }
+    }
+    if (strlen(arg) > 0) // If there is something left in arg, it is an error
+    {
+        exit(EXIT_FAILURE);
+    }
+    if (strlen(url.username) == 0) // If username is empty, set it to anonymous
+    {
+        strcpy(url.username, "anonymous");
+    }
+    if (strlen(url.port) == 0) // If port is empty, set it to 21
+    {
+        strcpy(url.port, "21");
+    }
+    return url;
+}
+
+void print_url(struct URL url)
+{
+    printf("protocol: %s\n", url.protocol);
+    printf("username: %s\n", url.username);
+    printf("password: %s\n", url.password);
+    printf("host: %s\n", url.hostname);
+    printf("port: %s\n", url.port);
+    printf("path: %s\n", url.path);
+}
+
+const char *get_filename(const char *path)
+{
+    const char *filename = strrchr(path, '/');
+    if (filename == NULL)
+    {
+        return path;
+    }
+    else
+    {
+        return filename + 1;
+    }
+}
 
 \end{c-darktheme}
 % ===================
 
+\subsubsection{main.c}
 % ===================
 \begin{c-darktheme}
+    #include <stdio.h>
+#include <stdlib.h>
 
+#include "download.h"
+
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        printf("Usage: %s <url>\n", argv[0]);
+        exit(1);
+    }
+
+    return download(argv[1]);
+}
 \end{c-darktheme}
-% ===================
 
-% ===================
-\begin{c-darktheme}
 
-\end{c-darktheme}
-% ===================
+\subsection{Wireshark}
 
-% ===================
-\begin{c-darktheme}
+\subsubsection{Experiência 1}
 
-\end{c-darktheme}
-% ===================
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/part2-exp1.png}
+    \caption{Experiência 1 - TUX64 <-> TUX 63}
+\end{figure}
 
-% ===================
-\begin{c-darktheme}
+\subsubsection{Experiência 2}
 
-\end{c-darktheme}
-% ===================
-
-% ===================
-\begin{c-darktheme}
-
-\end{c-darktheme}
-% ===================
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping3-2.png}
+    \caption{Experiência 2 - TUX63 -> TUX62}
 
 \end{document}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping3-2-broadcast.png}
+    \caption{Experiência 2 - TUX63 -> TUX62}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping3-3-broadcast.png}
+    \caption{Experiência 2 - TUX63 -> TUX62}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping3-4-broadcast.png}
+    \caption{Experiência 2 - TUX63 -> TUX64}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping2-3-broadcast.png}
+    \caption{Experiência 2 - TUX62 -> TUX63}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping2-4-broadcast.png}
+    \caption{Experiência 2 - TUX62 -> TUX64}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/exp2-ping2-2-broadcast.png}
+    \caption{Experiência 2 - TUX62 -> TUX62}
+\end{figure}
 
