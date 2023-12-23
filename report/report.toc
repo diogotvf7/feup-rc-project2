@@ -4,5 +4,9 @@
 \contentsline {subsection}{\numberline {2.1}Estrutura do código}{1}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Fluxo do programa}{1}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Configurar e analisar o funcionamento de uma rede}{2}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Exp 1 - Configurar o IP de uma rede}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Exp 4 - Configuração de um Router Comercial e Implementação de NAT}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.1}Experiência 1}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Objetivo}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Quais são os comandos necessários para esta experiência?}{2}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Quais são os pacotes ARP e para que são usados?}{2}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5} O que são os os endereços MAC e IP dos pacotes ARP e porquê?}{2}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Exp 4 - Configuração de um Router Comercial e Implementação de NAT}{2}{subsection.3.6}%

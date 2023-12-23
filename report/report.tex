@@ -194,10 +194,179 @@ A escrita do ficheiro no disco é feita através da função \hl[2]{write}. \\
 
 O objetivo deste conjunto de experiências é configurar uma rede de computadores de modo a que estes tenham acesso à internet para instalar ficheiros a partir de um servidor remoto usando o protocolo FTP desenvolvido ou seja, a aplicação.
 
-\subsection{Exp 1 - Configurar o IP de uma rede}
+\subsection{Experiência 1}
 
-O objetivo desta experiência é conectar o Tux-3 ao Tux-4 a partir do MicroTik Switch.
+\subsubsection{Arquitetura da rede}
+    
+No fim desta experiência, a configuração da rede deverá consistir de 2 computadores(TUX63 e TUX64) conectados pelo Switch.
 
+\subsubsection{Objetivo}
+
+O propósito desta experiência foi mostrar como fazer duas máquinas comunicar entre si através de uma rede.
+
+\subsubsection{Quais são os comandos necessários para esta experiência?}
+
+\begin{bash-darktheme}
+    # TUX63:
+    ifconfig eth0 up
+    ifconfig eth0 172.16.60.1/24
+
+    # TUX64:
+    ifconfig eth0 up
+    ifconfig eth0 172.16.60.254/24
+\end{bash-darktheme}
+ 
+Os computadores estavam connectados ao Switch, usando a bridge default deste para comunicarem entre si. 
+
+Para testar a comunicação entre as duas máquinas, usamos o comando \hl{ping} no \hl{TUX63}: 
+
+\begin{bash-darktheme}
+    ping 172.16.60.254
+\end{bash-darktheme}
+
+\subsubsection{Quais são os pacotes ARP e para que são usados?}
+
+ARP significa \hl{Address Resolution Protocol} e é um protocolo usado para encontrar o endereço MAC de um vizinho de rede para um determinado endereço IPv4. Este comando é usado para manipular ou exibir a cache de vizinhos de rede IPv4 do kernel.
+
+\subsubsection{O que são os os endereços MAC e IP dos pacotes ARP e porquê?}
+
+\hl{ARP} é um protocolo que associa endereços \hl{IP} a endereços \hl{MAC} na tabela ARP para permitir a utilização destes em uso futuro.
+O MAC \hl{Media Access Control} é um endereço físico que identifica um dispositivo numa rede. É usado na data link layer para assegurar o endereço físico do computador - isto significa que está relacionado com o hardware. Os endereços MAC são únicos e não podem ser alterados. É composto por 6 bytes (48 bits) e é representado em hexadecimal.
+O IP \hl{Internet Protocol} é um endereço lógico que identifica uma conexão entre um computador e uma rede. Pode mudar ao longo do tempo e devido ao ambiente. É usado na network layer para assegurar o endereço lógico do computador - isto significa que está relacionado com o software. Os endereços IP podem ser facilmente encontrados por terceiros, pois são transmitidos pela internet. É composto por 4 bytes (32 bits) e é representado em decimal.
+
+
+\subsubsection{Que pacotes é que o comando ping gera?}
+
+O comando \hl{ping} gera pacotes \hl{ARP} e pacotes \hl{ICMP}. ICMP \hl{Internet Control Message Protocol} é um protocolo da camada de rede que reporta erros e fornece outras informações relevantes para o processamento de pacotes IP. ICMP é usado pelo comando ping para testar uma conexão de rede IP.
+
+\subsubsection{Quais são os MAC e IP dos pacotes ping?}
+
+Encontram-se na secção de análise dos logs desta experiência. 
+
+\subsubsection{Como determinar se um pacote é ARP, IP ou ICMP?}
+
+É possível determinar se um frame Ethernet recebido é ARP, IP, ICMP verificando a captura do WireShark, na coluna Portocol. Também é possível verificar o tipo de pacote através do campo Type do cabeçalho Ethernet. O valor 0x0800 indica que o pacote é IP ou ICMP já que este se encontra guardado no pacote do IPv4, o valor 0x0806 indica que o pacote é ARP.
+
+\subsubsection{Como determinar o tamanho de um pacote recebido?}
+
+O tamanho de um pacote recebido pode ser determinado através da captura do WireShark, na coluna Length. Além disso, o tamanho dos pacotes IPv4 pode ser determinado a partir de 2 bytes que se encontram no pacote.
+Quanto aos pacotes ARP, estes possuem um tamanho fixo de 28 bytes.
+
+\subsubsection{O que é a interface loopback e porque é que é importante?}
+
+A interface loopback é uma interface de rede virtual que permite que um computador se comunique consigo mesmo. É importante pois permite testar a pilha de protocolos TCP/IP sem a necessidade de uma rede física.
+
+\subsubsection{Análise dos logs}
+
+Inicialmente, o TUX63 não sabe o endereço MAC do TUX64 e vice-versa. Assim, o TUX63 envia um pacote ARP para o \hl{broadcast} (MAC FF:FF:FF:FF:FF:FF) com o endereço IP do TUX64. O TUX64 recebe o pacote ARP vindo do \hl{broadcast}, que contém o IP do TUX63, e responde ao TUX63 de modo a indicar que guardou o seu endereço IP no pedido ARP, enviando o seu endereço MAC. O TUX63 ao receber este pacote, guarda o endereço MAC do TUX64 na sua tabela ARP. Permitindo assim obter um PING request e PING response.
+Os endereços IP e Mac obtidos são os seguintes:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+    \hl{PC} & \hl{IP} & \hl{MAC} \\ \hline
+    TUX63 & 172.16.60.1 & 00:21:5a:5a:75:bb  \\
+    TUX64 & 172.16.60.254 & 00:21:5a:61:2d:df \\
+    \end{tabular}
+\end{table}
+
+\subsection{Experiência 2}
+
+\subsubsection{Arquitetura da rede}
+
+No final da experiência, a configuração da red deverá consistir de 2 computadores (TUX63 e TUX64) e um computador (TUX62) conectados às bridges (bridge0) e (bridge1) pelo Switch, respetivamente. 
+
+\subsubsection{Objetivo}
+
+Esta experiência teve como objetivo ensinar-nos a configurar 2 domínios de rede diferentes no mesmo switch e verificar que por padrão não ocorre comunicação entre estes domínios.
+
+\subsubsection{Quais são os comandos necessários para esta experiência?}
+
+\begin{bash-darktheme}
+    # Continuando a partir da experiencia anterior:
+
+    # No tux2
+    ifconfig eth0 up
+    ifconfig eth0 172.16.61.1/24
+
+    # Switch
+    /system reset-configuration
+
+    /interface bridge add name=bridge60
+    /interface bridge add name=bridge61
+
+    # No tux3, para a sua porta eth0 X, no tux4 para a sua porta eth0 Y e no tux2 para a sua porta eth0 Z:
+    /interface bridge port remove [find interface=etherX]
+    /interface bridge port remove [find interface=etherY]
+    /interface bridge port remove [find interface=etherZ]
+    /interface bridge port add bridge=bridge60 interface=etherX
+    /interface bridge port add bridge=bridge60 interface=etherY
+    /interface bridge port add bridge=bridge61 interface=etherZ
+\end{bash-darktheme}
+
+\subsubsection{ Quantos domínios de broadcast existem? O que podemos concluir a partir dos logs? / Análise dos logs}
+
+Como configuramos 2 bridges, podemos concluir que existem 2 domínios de broadcast. Isto porque cada bridge é um domínio de broadcast. Podemos concluir isto a partir dos logs pois o TUX3 obteve uma resposta do TUX4, mas não do TUX2. Isto significa que o TUX3 está no mesmo domínio de broadcast que o TUX4, mas não no mesmo domínio de broadcast que o TUX2.
+Além disso, é possível concluir que passaram a existir 2 sub-redes, uma para cada bridge. Isto porque, apesar de ser possível fazer ping do TUX3 para o TUX4, não é possível fazer ping do TUX3 para o TUX2 já que, nos logs, não existem pacotes ICMP.
+
+\subsection{Experiência 3}
+
+\subsubsection{Arquitetura da rede}
+
+No final desta experiência, é esperado obtermos uma arquitetura semelhante à da experiência anterior, com a adição da conexão do TUX64 a ambas as bridges.
+
+\subsubsection{Objetivo}
+
+O objetivo desta experiência foi ensinar-nos a transformar o TUX64 num router e a configurar o mesmo para que este possa comunicar com os restantes computadores.
+
+\subsubsection{Quais são os comandos necessários para esta experiência?}
+
+\begin{bash-darktheme}
+        # Continuando a partir da experiencia anterior:
+
+        # Switch - seja agora a conexao do eth1 do tux4 a bridge61 pela porta W
+
+        /interface bridge port remove [find interface=etherW]
+        /interface bridge port add bridge=bridge61 interface=etherW
+
+        # No tux4
+        ifconfig eth1 up
+        ifconfig eth1 172.16.61.253/24
+
+        sysctlnet.ipv4.ip_forward=1
+        sysctlnet.ipv4.icmp_echo_ignore_broadcasts=0
+        
+        # No tux3
+        route add -net 172.16.61.0/24 gw 172.16.60.254
+        
+        # No tux2
+        route add -net 172.16.60.0/24 gw 172.16.61.253
+
+\end{bash-darktheme}
+
+Nota: Devido a não conseguirmos obter os logs na nossa mesa, foi necessário utilizar outros ips, mas o procedimento é o mesmo.
+
+\subsubsection{Que rotas existem nos computadores? Qual o seu significado?}
+    
+Existem 2 rotas, no TUX62 e no TUX63. Como a rota 64 é um gateway de ambos, a rota 62 é para chegar ao 63 e a rota 63 é para chegar ao 62, passando pelo 64. 
+
+\subsubsection{Que informação contém uma entrada da tabela de encaminhamento?}
+
+Uma entrada da tabela de encaminhamento contém o endereço de destino/origem, o endereço de gateway e a máscara de rede.
+
+\subsubsection{ Que mensagens ARP, e os endereços MAC, são observadas e porquê? / Análise dos logs} 
+
+The exchanged ARP messages contain only the MAC addresses of Tux63 and Tux64 and not the final destination(Tux62).
+This occurs because of the existence of the route. 
+Tux63 does not know the address of Tux62, it only knows the address of the gateaway (Tux64) that leads to Tux62.
+
+No caso do ping do TUX63 para o TUX62. As mensagens ARP trocadas contêm apenas os endereços MAC do TUX63 e do TUX64 e não do destino final (TUX62). Isto ocorre devido à existência da rota. O TUX63 não conhece o endereço do TUX62, apenas conhece o endereço do gateway (TUX64) que leva ao TUX62.
+
+Quando se apaga as tabelas ARP no TUX64 e se corre o mesmo ping novamente, os 3 computadores não se conhecem, pois não sabem os endereços MAC uns dos outros. Ao realizar o ping, é lançado um pedido ARP para o \hl{broadcast} e para a sub-net da bridge60 a pedir o endereço MAC do TUX64, default gateway do TUX62. É gerada a resposta ARP e esta é enviada de volta para o TUX63, que guarda o endereço MAC do TUX64 na sua tabela ARP e vice-versa. 
+De seguida, o ping passa pelo TUX64 e alcança o TUX62, sendo realizado o mesmo processo de troca de mensagens ARP entre o TUX64 e o TUX62.
+
+É importante notar que o TUX63 não tem informação sobre o endereço MAC do TUX62 e vice-versa. Cada um destes computadores apenas conhece o endereço MAC do seu gateway, que é o TUX64.
 
 
 % ...
@@ -208,8 +377,47 @@ O objetivo desta experiência é conectar o Tux-3 ao Tux-4 a partir do MicroTik 
 
 
 
+\subsection{Experiência 5}
 
+\subsubsection{Arquitetura da rede}
 
+A arquitetura desta experiência é a mesma da experiência anterior.
+
+\subsubsection{Objetivo}
+
+O objetivo desta experiência foi ensinar-nos a dar ping a hosts com a utilização do DNS.
+
+\subsubsection{Quais são os comandos necessários para esta experiência?}
+
+\begin{bash-darktheme}
+    # Continuando a experiencia anterior:
+
+    # No tux2
+    echo 'nameserver 172.16.2.1' > /etc/resolv.conf
+    
+    # No tux3
+    echo 'nameserver 172.16.2.1' > /etc/resolv.conf
+
+\end{bash-darktheme}
+
+\subsubsection{ Como configurar o DNS num host?}
+
+No terminal do TUX2 e do TUX3, precisamos de correr o comando hl{sudo nano /etc/resolv.conf} e adicionar a seguinte linha:
+
+\begin{bash-darktheme}
+    nameserver <DNS IP address>
+\end{bash-darktheme}
+
+O \hl{DNS (Domain Name System)} mapeia um nome de um host/dominio para endereços de IP. Portanto, ao utilizar este comando, estamos a permitir dar pings a hosts e domínios.
+
+\subsubsection{ Que pacotes são trocados pelo DNS e que informação é transportada?}
+
+Os pacotes DNS  trocados são o DNS query e o DNS response. O DNS query contém o nome de domínio e o DNS response contém o endereço IP do nome de domínio. Tornando possível traduzir o nome de domínio num endereço IP no router.
+
+\subsubsection{Análise dos logs}
+
+Nesta experiência, a partir do TUX62, damos ping ao google.com. Como google.com não é um IP, é necessário utilizar o \hl{DNS}. 
+Inicialmente, o DNS procura os nameservers que estão definidos no ficheiro \hl{/etc/resolv.conf}. De seguida, o DNS envia um pacote \hl{DNS query} para o nameserver. O nameserver responde com um pacote \hl{DNS response} que contém o endereço IP do google.com, permitindo com que o ping seja bem sucedido.
 
 \end{document}
 
